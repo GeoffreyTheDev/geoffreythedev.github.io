@@ -1,0 +1,10 @@
+<h2>Contact Me</h2>
+
+<div *ngIf="!submitted">
+  <p>Leave a message for me here!</p>
+  <button (click)="submitForm()">Submit Message</button>
+</div>
+
+<div *ngIf="submitted">
+  <p style="color: green;">Thank you! Your message was sent successfully.</p>
+</div>

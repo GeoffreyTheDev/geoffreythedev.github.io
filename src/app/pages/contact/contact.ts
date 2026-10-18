@@ -19,7 +19,7 @@ export class Contact {
     const form = event.target as HTMLFormElement;
 
     try {
-      await fetch('YOUR_FORMSPREE_LINK_HERE', {
+      await fetch('https://formspree.io/f/myekvzkj', {
         method: 'POST',
         body: new FormData(form),
         headers: {

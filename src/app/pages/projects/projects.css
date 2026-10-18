@@ -1,0 +1,75 @@
+.room-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.room-title {
+  font-size: 3rem;
+  color: #38bdf8;
+  border-bottom: 2px solid #1e293b;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.project-card {
+  background-color: #1e293b;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: #38bdf8;
+}
+
+.project-content {
+  padding: 25px;
+}
+
+.project-content h3 {
+  color: #f8fafc;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.project-content p {
+  color: #cbd5e1;
+  font-size: 1rem;
+}
+
+.project-actions {
+  background-color: #0f172a;
+  padding: 15px 25px;
+  border-top: 1px solid #1e293b;
+}
+
+.like-btn {
+  background-color: transparent;
+  color: #38bdf8;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.like-btn:hover {
+  background-color: #38bdf8;
+  color: #0f172a;
+}

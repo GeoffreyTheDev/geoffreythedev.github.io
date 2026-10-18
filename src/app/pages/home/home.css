@@ -1,0 +1,167 @@
+.hero-container {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Forces strict side-by-side layout without overlap */
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.hero-text-section {
+  flex: 1.2; /* Gives the big text plenty of room */
+}
+
+.greeting {
+  color: #38bdf8;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.name-title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.role-subtitle {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 15px 0 25px 0;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background-color: #38bdf8;
+  color: #0f172a;
+  border: 2px solid #38bdf8;
+}
+
+.primary-btn:hover {
+  background-color: transparent;
+  color: #38bdf8;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  color: #f8fafc;
+  border: 2px solid #475569;
+}
+
+.secondary-btn:hover {
+  border-color: #f8fafc;
+}
+
+/* Right Column & Image */
+.hero-image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Increased image size, removed the bouncy transform */
+.image-frame {
+  position: relative;
+  width: 380px;
+  height: 440px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border: 4px solid #1e293b;
+  transition: border-color 0.4s ease;
+}
+
+.image-frame:hover {
+  border-color: #38bdf8;
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block;
+}
+
+/* Smooth, subtle blue tint overlay on hover */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0369a1;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.image-frame:hover .image-overlay {
+  opacity: 0.4;
+}
+
+/* Social Pills */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-pill {
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 24px;
+  border: 1px solid #475569;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.social-pill:hover {
+  color: #0f172a;
+  background-color: #38bdf8;
+  border-color: #38bdf8;
+}

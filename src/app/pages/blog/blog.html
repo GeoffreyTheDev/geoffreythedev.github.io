@@ -1,5 +1,22 @@
-<h2>My Blog</h2>
-<div *ngFor="let post of posts" style="border-bottom: 1px solid #ccc; margin-bottom: 10px; padding-bottom: 10px;">
-  <h3>{{ post.title }}</h3>
-  <p>{{ post.content }}</p>
+<div class="room-container">
+  <h1 class="room-title">My Blog</h1>
+  <p class="section-subtitle" style="margin-top: 0; font-size: 1.2rem;">Thoughts on software development, tech, and my learning journey.</p>
+  
+  <div class="blog-grid">
+    <!-- Dummy Article 1 -->
+    <div class="blog-card">
+      <span class="blog-date">October 2026</span>
+      <h3>Building My First Angular Portfolio</h3>
+      <p>A deep dive into how I transitioned from basic HTML/CSS to building a fully component-based web application using Angular and deploying it to the cloud.</p>
+      <a href="#" class="read-more">Read Article →</a>
+    </div>
+
+    <!-- Dummy Article 2 -->
+    <div class="blog-card">
+      <span class="blog-date">September 2026</span>
+      <h3>Understanding REST APIs</h3>
+      <p>Breaking down how modern applications communicate. A beginner-friendly guide to endpoints, HTTP methods, and structuring JSON data.</p>
+      <a href="#" class="read-more">Read Article →</a>
+    </div>
+  </div>
 </div>

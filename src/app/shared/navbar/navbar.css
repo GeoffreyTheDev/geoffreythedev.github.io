@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f172a;
+  padding: 15px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* This styles your name to look like a modern logo */
+.nav-brand .logo-text {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.5px;
+}
+
+.nav-brand .highlight-dot {
+  color: #38bdf8;
+}
+
+/* This adds the space between your links */
+.nav-links {
+  display: flex;
+  gap: 30px; 
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* This creates a cool highlight block when you hover over links */
+.nav-links a:hover {
+  color: #0f172a;
+  background-color: #38bdf8;
+}

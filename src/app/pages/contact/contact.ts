@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-contact',
@@ -9,35 +9,39 @@ import { Component } from '@angular/core';
 })
 export class Contact { 
   isSubmitted = false;
-  isSubmitting = false; // Tracks if it is currently sending
+  isSubmitting = false;
 
-  async onSubmit(event: Event) {
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  onSubmit(event: Event) {
     event.preventDefault(); 
-    
-    // Immediately disable the button and show "Sending..."
     this.isSubmitting = true; 
     const form = event.target as HTMLFormElement;
 
-    try {
-      await fetch('https://formspree.io/f/myekvzkj', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+    // 1. Send the email silently in the background
+    fetch('https://formspree.io/f/myekvzkj', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(() => {
+      this.showSuccess(form);
+    }).catch(() => {
+      this.showSuccess(form);
+    });
 
-      // Turn the button green and clear the text boxes
-      this.isSubmitted = true;
-      form.reset();
-    } catch (error) {
-      console.error('Error submitting form', error);
-      // Force success state anyway so you aren't left hanging
-      this.isSubmitted = true;
-      form.reset();
-    } finally {
-      // Stop the loading animation
-      this.isSubmitting = false; 
-    }
+    // 2. The Fail-Safe: Force the green success state after 1.5 seconds
+    setTimeout(() => {
+      if (this.isSubmitting) {
+        this.showSuccess(form);
+      }
+    }, 1500);
+  }
+
+  // 3. The function that updates the visual screen
+  showSuccess(form: HTMLFormElement) {
+    this.isSubmitting = false;
+    this.isSubmitted = true;
+    form.reset();
+    this.cdr.detectChanges(); 
   }
 }

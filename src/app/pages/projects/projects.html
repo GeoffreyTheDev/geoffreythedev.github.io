@@ -1,19 +1,47 @@
 <div class="room-container">
   <h1 class="room-title">My Projects</h1>
-  <p class="section-subtitle" style="margin-top: 0; font-size: 1.2rem;">Here are some of the software solutions I am building.</p>
+  <p class="section-subtitle" style="margin-top: 0; font-size: 1.2rem; color: #cbd5e1; margin-bottom: 40px;">
+    A collection of my software development work, featuring full-stack applications and system architecture.
+  </p>
 
   <div class="projects-grid">
-    <div *ngFor="let project of projects" class="project-card">
+    
+    <!-- Project 1: Portfolio -->
+    <div class="project-card">
       <div class="project-content">
-        <h3>{{ project.name }}</h3>
-        <p>{{ project.description }}</p>
-      </div>
-      <div class="project-actions">
-        <button class="like-btn" (click)="like(project)">
-          👍 Like ({{ project.likes }})
-        </button>
-        <!-- We will add GitHub links here later -->
+        <h3 class="project-title">Personal Developer Portfolio</h3>
+        <p class="project-description">
+          A responsive single-page application built to showcase my technical projects, featuring dynamic routing, functional API-driven contact forms, and custom SVGs.
+        </p>
+        <div class="tech-stack">
+          <span class="tech-tag">Angular</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">CSS</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/GeoffreyTheDev/geoffreythedev.github.io" target="_blank" class="btn secondary-btn">Source Code</a>
+          <a href="https://geoffreythedev.github.io" target="_blank" class="btn primary-btn">Live Site</a>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Project 2: Backend Placeholder -->
+    <!-- Project 2: Digital Attendance Register -->
+    <div class="project-card">
+      <div class="project-content">
+        <h3 class="project-title">Digital Attendance Register</h3>
+        <p class="project-description">
+          A web-based application designed to efficiently track and manage attendance records digitally. This system replaces manual tracking with a streamlined, database-driven solution for accurate and secure record-keeping.
+        </p>
+        <div class="tech-stack">
+          <!-- Adjust these tags to match the exact languages you used! -->
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">Laravel</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/WAD621S-2025/G50-Digital-Attendance-Register" target="_blank" class="btn secondary-btn">Source Code</a>
+        </div>
+      </div>
+    </div>

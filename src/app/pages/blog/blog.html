@@ -1,22 +1,939 @@
-<div class="room-container">
-  <h1 class="room-title">My Blog</h1>
-  <p class="section-subtitle" style="margin-top: 0; font-size: 1.2rem;">Thoughts on software development, tech, and my learning journey.</p>
+<div class="blog-wrapper">
   
-  <div class="blog-grid">
-    <!-- Dummy Article 1 -->
-    <div class="blog-card">
-      <span class="blog-date">October 2026</span>
-      <h3>Building My First Angular Portfolio</h3>
-      <p>A deep dive into how I transitioned from basic HTML/CSS to building a fully component-based web application using Angular and deploying it to the cloud.</p>
-      <a href="#" class="read-more">Read Article →</a>
+ <!-- HEADER -->
+  <div class="blog-header">
+    <h1 class="room-title">My Journey</h1>
+    <p class="section-subtitle">
+      Reflections on my experiences, technical growth, and the lessons I've learned along the way.
+    </p>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="blog-layout">
+    
+    <!-- LEFT COLUMN: MAIN CONTENT -->
+    <div class="main-content">
+      
+      <!-- VIEW 1: THE ARTICLE HUB -->
+      <ng-container *ngIf="selectedPost === null">
+        <div class="blog-grid">
+          
+          <!-- Article Card 1 -->
+          <div class="blog-card" (click)="openArticle(1)">
+            <div class="card-content">
+              <h3 class="card-title">A Year of Growth, Innovation, and Discovery at Datalani Technology</h3>
+              <p class="card-meta">September 2025 – September 2026 | Software Development</p>
+              <p class="card-preview">
+                Some experiences teach you how to do the work; others change the way you see the world. My year at Datalani Technology was a combination of both...
+              </p>
+            </div>
+          </div>
+
+          <!-- Article Card 2 -->
+          <div class="blog-card" (click)="openArticle(2)">
+            <div class="card-content">
+              <h3 class="card-title">Beyond Technology: My Experience at Namibia’s Biodiversity Finance Facility Validation Workshop</h3>
+              <p class="card-meta">January 2026 | Sustainability · Finance · Collaboration</p>
+              <p class="card-preview">
+                Sometimes, the most meaningful professional experiences are the ones that introduce us to worlds beyond our own. Earlier this year, I had the opportunity to contribute to the Biodiversity Finance Facility Validation Workshop in Windhoek...
+              </p>
+            </div>
+          </div>
+
+          <!-- Article Card 7: VSAT Kunene Journey -->
+          <div class="blog-card" (click)="openArticle(7)">
+            <div class="card-content">
+              <h3 class="card-title">Beyond the Code: My VSAT Installation Journey Through the Kunene Region</h3>
+              <p class="card-meta">September 2026 | Satellite Technology · Networking · Adaptability · Infrastructure</p>
+              <p class="card-preview">
+                One month of satellite technology, networking, teamwork, and discovering the power of adaptability. Stepping into a new world of IT in Namibia's remote Kunene region...
+              </p>
+            </div>
+          </div>
+
+          <!-- Article Card 3 -->
+          <div class="blog-card" (click)="openArticle(3)">
+            <div class="card-content">
+              <h3 class="card-title">Beyond Code: Exploring Systems Thinking, Design Automation, and the Future of Digital Transformation</h3>
+              <p class="card-meta">28 September 2026 | Digital Transformation · Systems Thinking · AI · Human-Centred Design</p>
+              <p class="card-preview">
+                What happens when we stop asking what technology can do and start asking what it should do, who it should serve, and how it can transform the world around us? Reflections from the Design Automation Workshop at NUST...
+              </p>
+            </div>
+          </div>
+
+          <!-- Article Card 6: IndabaX 2026 -->
+          <div class="blog-card" (click)="openArticle(6)">
+            <div class="card-content">
+              <h3 class="card-title">IndabaX 2026: Where Technology, Sustainability, and Innovation Meet</h3>
+              <p class="card-meta">Early 2026 | Artificial Intelligence · Sustainability · Innovation · Growth</p>
+              <p class="card-preview">
+                Reflecting on a season of learning, interdisciplinary discovery, and meaningful growth. Sometimes, the most valuable learning experiences are the ones that take us beyond what we already know...
+              </p>
+            </div>
+          </div>
+
+          <!-- Article Card 4 -->
+          <div class="blog-card" (click)="openArticle(4)">
+            <div class="card-content">
+              <h3 class="card-title">Shaping the Next Generation: Teaching Young Minds to Use Artificial Intelligence Responsibly</h3>
+              <p class="card-meta">7 July 2026 | Windhoek Central Primary School, Namibia</p>
+              <p class="card-preview">
+                What does it mean to prepare young people for the future when technology can generate answers in seconds? Is it enough to teach them how to use Artificial Intelligence, or must we also teach them when to question it?
+              </p>
+            </div>
+          </div>
+
+          <!-- Article Card 5: IndabaX 2025 -->
+          <div class="blog-card" (click)="openArticle(5)">
+            <div class="card-content">
+              <h3 class="card-title">IndabaX 2025: Igniting Curiosity, Expanding Perspectives, and Exploring the Future of Technology</h3>
+              <p class="card-meta">30 July & 1 August 2025 | Namibia University of Science and Technology (NUST)</p>
+              <p class="card-preview">
+                Sometimes, all it takes is one conversation, one new idea, or one shared experience to change the way we see the world. Reflections from attending IndabaX 2025 both virtually and in person...
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </ng-container>
+
+      <!-- VIEW 2: DATALANI TECHNOLOGY READING PAGE -->
+      <ng-container *ngIf="selectedPost === 1">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            <img src="datalani.jpg" alt="Datalani Technology Experience" class="blog-image" (click)="openLightbox('datalani.jpg')" onerror="this.style.display='none'">
+            
+            <h2 class="post-title">A Year of Growth, Innovation, and Discovery at Datalani Technology</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">September 2025 – September 2026</span>
+              <span class="post-category">Software Development · IT · Graphic Design</span>
+            </div>
+            
+            <div class="post-content">
+              <p>Some experiences teach you how to do the work; others change the way you see the world. My year at Datalani Technology was a combination of both.</p>
+              <p>Working across software development, IT, and graphic design gave me the opportunity to step beyond the classroom and experience what it means to contribute to real-world solutions. From working on a School Management System using Laravel and applying fundamental Computer Science concepts, to collaborating on creative projects as a graphic designer, every experience challenged me to think differently, learn continuously, and push beyond my comfort zone.</p>
+              <p>One of the most valuable aspects of this journey was the people. Working alongside a collaborative and supportive team, participating in in-person project sessions, and interacting with individuals from different backgrounds strengthened my communication, interpersonal, and teamwork skills. I came to appreciate that successful technology is not built on code alone; it is built through collaboration, shared ideas, creativity, and a genuine understanding of people's needs.</p>
+              <p>Perhaps the most significant realization was how deeply software products are woven into our everyday lives. Behind the systems we use to learn, communicate, conduct business, and manage our daily activities are people working to solve problems and make life more efficient. Being part of that process gave me a deeper appreciation for the responsibility and value that come with creating technology.</p>
+              <p>Looking back, September 2025 to September 2026 was more than a year of professional experience. It was a year of growth, discovery, meaningful collaboration, and a clearer understanding of the professional I aspire to become.</p>
+              <blockquote class="post-quote">
+                "My biggest lesson? Technical skills may open doors, but your willingness to learn, your ability to work with people, and your courage to embrace challenges are what help you grow once you walk through them. You do not need to know everything before you begin; you need to be willing to learn from every opportunity, every challenge, and every person you encounter."
+              </blockquote>
+              <p>I leave this chapter with more than technical experience. I leave with a broader perspective, a stronger sense of purpose, and an even greater passion for using technology and creativity to build solutions that matter.</p>
+              
+              <img src="datalani-team.jpg" alt="The Datalani Team" class="blog-image" style="margin-top: 30px;" (click)="openLightbox('datalani-team.jpg')" onerror="this.style.display='none'">
+
+              <!-- Resource Link -->
+              <div class="post-resources" style="margin-top: 25px;">
+                <h4 class="resources-title">Company Reference</h4>
+                <div class="resource-links">
+                  <a href="https://www.datalani.com/about" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    🌐 Read More About Datalani Technology
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
+      <!-- VIEW 3: BIODIVERSITY WORKSHOP READING PAGE -->
+      <ng-container *ngIf="selectedPost === 2">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            <h2 class="post-title">Beyond Technology: My Experience at Namibia’s Biodiversity Finance Facility Validation Workshop</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">January 2026</span>
+              <span class="post-category">Sustainability · Finance · Collaboration · Professional Growth</span>
+            </div>
+            
+            <div class="post-content">
+              <p>Sometimes, the most meaningful professional experiences are the ones that introduce us to worlds beyond our own. Earlier this year, I had the opportunity to contribute to the Biodiversity Finance Facility Validation Workshop in Windhoek, an experience that broadened my understanding of sustainability, stakeholder collaboration, and the role of innovative financing in addressing environmental challenges.</p>
+              <p>The workshop, held under the United Nations Development Programme’s Biodiversity Finance Initiative (BIOFIN), focused on refining the design of an Endowment Fund intended to help mobilize sustainable financing for biodiversity conservation in Namibia. It brought together stakeholders from the public sector, private sector, and civil society to contribute perspectives toward strengthening the facility’s design and long-term relevance.</p>
+              <p>My involvement provided valuable exposure to the coordination and documentation involved in a professional stakeholder engagement. Working alongside others to support the workshop gave me an opportunity to strengthen my communication, organizational, and interpersonal skills while observing how people from different professional backgrounds collaborate toward a shared objective.</p>
+              <p>What particularly stood out to me was the realization that protecting biodiversity requires more than environmental awareness alone. It also requires thoughtful financial planning, effective policies, institutional cooperation, and innovative ways of mobilizing resources. The workshop highlighted how financial institutions, government bodies, conservation organizations, and development partners can contribute to creating sustainable solutions for Namibia’s natural environment.</p>
+              <p>As a Computer Science student specializing in Software Development, I found this especially interesting. I am accustomed to thinking about how technology can solve problems through software, data, and systems. This experience encouraged me to broaden that perspective and consider how innovation, financial systems, and collaboration across disciplines can contribute to challenges that extend far beyond the technology sector.</p>
+              <p>It also reinforced an important professional lesson: meaningful work often happens behind the scenes. Successful initiatives depend not only on the people presenting ideas or making decisions, but also on the coordination, documentation, communication, and teamwork that allow those ideas to move forward.</p>
+              <p>Looking back, the workshop was more than an opportunity to attend a professional event. It was an opportunity to learn from people with different areas of expertise, gain exposure to an important national development initiative, and appreciate the connections between environmental sustainability and economic resilience.</p>
+              <blockquote class="post-quote">
+                "Never limit your learning to the boundaries of your chosen field. Some of the most valuable opportunities for growth come from stepping into unfamiliar environments, listening to different perspectives, and discovering how your own knowledge can connect with the work of others."
+              </blockquote>
+              <p>As I continue developing my skills in software development and technology, I want to remain open to opportunities that challenge my thinking and expose me to new industries. After all, technology is not an end in itself; its greatest value lies in how we use it to address real problems and create meaningful impact.</p>
+              <p><em>Sometimes, the first step toward solving a problem is learning to see it from a completely different perspective.</em></p>
+
+              <h3 class="section-heading">Workshop Photos <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">(Click any image to view full size)</span></h3>
+              <div class="article-gallery">
+                <img src="biodiversity-1.jpg" alt="Biodiversity Workshop Session 1" class="gallery-img" (click)="openLightbox('biodiversity-1.jpg')" onerror="this.style.display='none'">
+                <img src="biodiversity-2.jpg" alt="Biodiversity Workshop Session 2" class="gallery-img" (click)="openLightbox('biodiversity-2.jpg')" onerror="this.style.display='none'">
+                <img src="biodiversity-3.jpg" alt="Biodiversity Workshop Stakeholders" class="gallery-img" (click)="openLightbox('biodiversity-3.jpg')" onerror="this.style.display='none'">
+                <img src="biodiversity-4.jpg" alt="Biodiversity Workshop Group Photo" class="gallery-img" (click)="openLightbox('biodiversity-4.jpg')" onerror="this.style.display='none'">
+              </div>
+
+              <div class="post-resources">
+                <h4 class="resources-title">Official Initiative & Event Links</h4>
+                <div class="resource-links">
+                  <a href="https://www.biofin.org/namibia/" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    🌐 BIOFIN Namibia Official Page
+                  </a>
+                  <a href="https://www.linkedin.com/posts/undpbiodiversity-biodiversityfinance-biofin-ugcPost-7420410066849267712-Zst6/" target="_blank" rel="noopener noreferrer" class="resource-btn linkedin-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    UNDP BIOFIN Event Post
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
+      <!-- VIEW 8: VSAT KUNENE REGION READING PAGE -->
+      <ng-container *ngIf="selectedPost === 7">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            
+            <h2 class="post-title">Beyond the Code: My VSAT Installation Journey Through the Kunene Region</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">September 2026</span>
+              <span class="post-category">Satellite Technology · Networking · Infrastructure · Adaptability</span>
+            </div>
+            
+            <div class="post-content">
+              <p><em>One month of satellite technology, networking, teamwork, and discovering the power of adaptability.</em></p>
+
+              <h3 class="section-heading">Stepping Into a New World of IT</h3>
+              <p>Sometimes, the most valuable learning experiences happen when we step outside the environments we know best.</p>
+              <p>Throughout September 2026, I had the opportunity to spend an entire month in Namibia's Kunene Region, working as a VSAT Support Technician with B&A Computronics, in collaboration with MTC. The project brought together professionals from different IT and engineering backgrounds to install and configure satellite systems in remote areas, helping establish network connectivity that could enable people in these communities to make telephone calls and access the internet.</p>
+              <p>As someone specializing in Software Development, much of my academic and professional journey has revolved around programming, application development, databases, and system design. However, this opportunity introduced me to a different side of the technology industry - one centred on networking, technical support, hardware installations, network configurations, and troubleshooting.</p>
+              
+              <!-- IMAGE 1: Solar / Setup -->
+              <img src="vsat-1.jpg" alt="VSAT Satellite Equipment Setup in Kunene" class="blog-image" (click)="openLightbox('vsat-1.jpg')" onerror="this.style.display='none'">
+
+              <p>Spending a full month in the region allowed me to immerse myself in this unfamiliar environment, learn from experienced professionals, overcome practical challenges, and experience parts of Namibia I had never visited before.</p>
+              <p>It became a month of technical discovery, personal growth, teamwork, and unforgettable experiences.</p>
+
+              <h3 class="section-heading">From Writing Code to Installing Satellites</h3>
+              <p>One of the most interesting aspects of the project was applying my Computer Science knowledge in a practical environment that differed significantly from software development.</p>
+              <p>Our work involved physically installing satellite equipment, configuring networks, testing connectivity, and troubleshooting issues that arose throughout the process. We had to combine networking concepts with practical technical skills and creative problem-solving to get the systems working as intended.</p>
+              <p>VSAT, or Very Small Aperture Terminal, is a satellite communication technology that can provide connectivity to locations where conventional network infrastructure may be limited or difficult to deploy. In remote areas, this technology can help bridge geographical barriers and connect communities to communication services.</p>
+              
+              <!-- IMAGE 2: Working on electronics -->
+              <img src="vsat-2.jpg" alt="Satellite Installation Team at Work" class="blog-image" (click)="openLightbox('vsat-2.jpg')" onerror="this.style.display='none'">
+
+              <p>The project helped me appreciate the infrastructure behind the digital services many of us use every day. We often take telephone calls, internet access, and online communication for granted without thinking about the equipment and systems required to make them possible.</p>
+              <p>Working on these installations gave me a firsthand look at some of the practical work involved in extending connectivity to remote communities.</p>
+              <p>It also highlighted the relationship between different IT disciplines. Software applications depend on infrastructure, networks connect systems, and hardware provides the foundation on which many digital services operate. Understanding these connections gave me a broader perspective on the technology ecosystem beyond the code I usually write.</p>
+
+              <h3 class="section-heading">The Challenges Behind Every Successful Connection</h3>
+              <p>The experience was rewarding, but it was not always easy.</p>
+              <p>There were moments of stress when configurations failed, connectivity proved difficult to establish, or troubleshooting took longer than expected. Sometimes, we had to reconsider our approach, investigate different possibilities, and try again.</p>
+              <p>These moments tested our patience and required us to remain focused even when the solution was not immediately obvious.</p>
+              <p>Interestingly, I found parallels between network troubleshooting and software debugging. In both cases, solving a problem requires systematic thinking, careful investigation, testing possible solutions, and learning from the results.</p>
+              <p>Every unsuccessful attempt gave us an opportunity to understand the system better. Every breakthrough reminded us that persistence and collaboration could turn a difficult situation into a valuable learning experience.</p>
+              <p>By the end of the project, our team had successfully installed and configured all the satellite systems assigned to us. Reaching that outcome after working through the challenges made the achievement particularly satisfying.</p>
+              <p>Sometimes, progress is not about getting everything right the first time. It is about learning from what went wrong and returning with a better approach.</p>
+
+              <h3 class="section-heading">The Human Impact of Connectivity</h3>
+              <p>Beyond the technical work, one of the most meaningful aspects of the project was understanding the purpose behind the installations.</p>
+              <p>In places where network coverage is readily available, making a phone call or accessing the internet can feel like an ordinary part of life. Yet, for people in remote communities, access to reliable connectivity may be more difficult to obtain.</p>
+              <p>Satellite technology can help overcome some of these geographical barriers, supporting communication services that allow people to contact family and friends, access information online, and use available digital services.</p>
+              
+              <!-- IMAGE 3: Techs on ladder -->
+              <img src="vsat-3.jpg" alt="Establishing Network Connectivity in Kunene" class="blog-image crop-dome" (click)="openLightbox('vsat-3.jpg')" onerror="this.style.display='none'">
+
+              <p>Internet connectivity can also create opportunities for education, business, and communication with the wider world, depending on the services available and the reliability of the connection.</p>
+              <p>Being involved in a project intended to establish this infrastructure encouraged me to look beyond the equipment itself and consider what connectivity can mean for the people who depend on it.</p>
+              <p>As a Computer Science student, I often think about technology in terms of applications, systems, and technical solutions. This experience reminded me that the value of technology is not measured only by how well a system works, but also by the opportunities it helps make possible.</p>
+              <p>Behind every successful technical installation is a purpose, and sometimes that purpose is as simple and important as helping people connect with one another.</p>
+
+              <h3 class="section-heading">Adaptability: Learning Beyond My Specialization</h3>
+              <p>Adaptability is something I have always associated with software engineering. The technology industry constantly evolves, requiring developers to learn new programming languages, frameworks, methodologies, and techniques.</p>
+              <p>Throughout my journey, I have tried to embrace this mindset by continuously expanding my technical knowledge and remaining open to new approaches.</p>
+              <p>However, the Kunene project introduced me to a different dimension of adaptability.</p>
+              <p>This time, I was not simply learning another programming language or software framework. I was stepping into another specialization within IT and applying my knowledge in an unfamiliar environment.</p>
+              <p>I had to become comfortable with practical networking tasks, learn from professionals with different expertise, and understand how concepts from my studies could be applied to satellite installations and connectivity troubleshooting.</p>
+              <p>The experience reminded me that adaptability goes beyond mastering new tools within your chosen field. It also means being willing to become a learner again, acknowledge what you do not know, and develop the skills required by a new situation.</p>
+              <p>Being adaptable does not mean knowing everything. It means being willing to learn what the situation requires.</p>
+              <p>This is a lesson I will carry into my software development career. I want to remain open to opportunities that challenge me, introduce me to unfamiliar disciplines, and broaden my understanding of how technology works in the real world.</p>
+
+              <h3 class="section-heading">The Value of Teamwork and Different Perspectives</h3>
+              <p>Working alongside professionals from various IT and engineering backgrounds was another valuable part of the experience.</p>
+
+              <!-- IMAGE 4: Ground station dome (Framed from top) -->
+<img src="vsat-4.jpg" 
+     alt="VSAT Satellite Dome" 
+     class="blog-image crop-satellite-top" 
+     (click)="openLightbox('vsat-4.jpg')" 
+     onerror="this.style.display='none'">
+
+              <p>Each team member brought different skills and perspectives, reminding me that successful technical projects rarely depend on one person's expertise alone. They require people to communicate effectively, share knowledge, coordinate their work, and support one another when challenges arise.</p>
+              <p>I learned the importance of listening, asking questions, and remaining open to approaches that differed from my own. Sometimes, a different perspective can help identify a problem or reveal a solution that might otherwise have been overlooked.</p>
+              <p>These lessons are equally important in software development, where collaboration between developers, network specialists, engineers, and other professionals can determine the success of a project.</p>
+              <p>The experience reinforced my belief that professional growth is not only about developing individual skills. It is also about learning how to work with others and recognizing the value each person brings to a shared objective.</p>
+
+              <h3 class="section-heading">Discovering the Beauty of Namibia</h3>
+              <p>Although the technical work was central to the trip, my experience in the Kunene Region extended far beyond satellite installations.</p>
+              <p>Spending an entire month in the region gave me the opportunity to travel through parts of Namibia I had never visited before. Seeing the landscapes firsthand allowed me to appreciate the country's remarkable beauty and diversity in a way that photographs alone cannot fully capture.</p>
+
+              <!-- GALLERY: IMAGE 5 & 6 -->
+              <div class="article-gallery">
+                <img src="vsat-5.jpg" alt="Scenic Landscapes of the Kunene Region" class="gallery-img crop-dome" (click)="openLightbox('vsat-5.jpg')" onerror="this.style.display='none'">
+                <img src="vsat-6.jpg" alt="Exploring Remote Communities in Kunene" class="gallery-img crop-top" (click)="openLightbox('vsat-6.jpg')" onerror="this.style.display='none'">
+              </div>
+
+              <p>I also had opportunities to interact with local people and experience different cultural perspectives and ways of life. These interactions reminded me of the importance of listening, respecting differences, and adapting how we communicate with people from different backgrounds.</p>
+              <p>Travelling for work became an opportunity for personal discovery as well as professional development. It helped me appreciate how much there is to learn beyond familiar environments and how valuable it can be to experience the world from different perspectives.</p>
+              <p>It also reminded me that technology ultimately exists within human environments. Behind every network, application, or communication system are people whose needs and experiences give that technology its purpose.</p>
+              <p>I returned with a deeper appreciation for Namibia and gratitude for the opportunity to discover more of the country while contributing to a meaningful technical project.</p>
+
+              <h3 class="section-heading">Bridging Theory and Real-World Experience</h3>
+              <p>The project also strengthened my appreciation for the relationship between academic knowledge and practical experience.</p>
+              <p>Computer Science provides a foundation for understanding networks, systems, and structured problem-solving. However, applying that knowledge in the field introduces practical challenges that require flexibility, experimentation, and sound judgement.</p>
+              <p>Throughout September, I experienced how theoretical concepts could be applied to physical installations, network configurations, and connectivity troubleshooting.</p>
+              <p>The experience reinforced the importance of combining technical knowledge with patience, attention to detail, and the ability to adapt when circumstances change.</p>
+              <p>It also reminded me that learning does not end when a class or project is completed. Every new environment introduces opportunities to develop skills, question assumptions, and deepen our understanding.</p>
+
+              <h3 class="section-heading">Final Reflection: Growth Beyond the Screen</h3>
+              <p>Looking back on September 2026, I am grateful for the opportunity to have worked as a VSAT Support Technician with B&A Computronics, in collaboration with MTC, throughout the month in the Kunene Region.</p>
+
+              <!-- IMAGE 7: Selfie -->
+              <img src="vsat-7.jpg" alt="Completed VSAT Installation Site" class="blog-image crop-selfie" style="margin-top: 25px;" (click)="openLightbox('vsat-7.jpg')" onerror="this.style.display='none'">
+
+              <p>The experience challenged me to step beyond my Software Development specialization and gain practical exposure to satellite technology, networking, hardware installations, configuration, and technical support.</p>
+              <p>I experienced stressful troubleshooting moments, learned from mistakes, celebrated successful configurations, and worked alongside professionals whose expertise broadened my understanding of the IT industry. Our team ultimately completed all the satellite installations and configurations assigned to us, contributing to a project intended to establish connectivity in remote communities.</p>
+              <p>Beyond the technical achievements, I discovered more of Namibia, interacted with local communities, and gained a greater appreciation for the importance of communication infrastructure in connecting people to the digital world.</p>
+              <p>Most importantly, I learned that adaptability is not merely a concept discussed in software engineering. It is a mindset that must be practised whenever we encounter unfamiliar challenges.</p>
+              <p>Sometimes, growth means learning a new programming language. Sometimes, it means troubleshooting a difficult network configuration. And sometimes, it means stepping into an entirely different discipline and discovering how much you can learn.</p>
+              <p>I return to my Software Development journey with new practical experience, a broader perspective, and an even greater appreciation for the interconnected world of IT.</p>
+              <p>I am grateful for the experience, proud of what our team accomplished, and excited for the opportunities that lie ahead.</p>
+
+              <blockquote class="post-quote">
+                "Sometimes, becoming a better software developer means stepping away from the code. And sometimes, the most meaningful thing you can build is not just a system, but a connection that brings people closer to the opportunities around them."
+              </blockquote>
+
+              <!-- External References & Further Reading -->
+              <div class="post-resources">
+                <h4 class="resources-title">Company Reference</h4>
+                <div class="resource-links">
+                  <a href="https://mailnam.net/" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    🌐 B&A Computronics Official Website
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
+      <!-- VIEW 4: DESIGN AUTOMATION WORKSHOP READING PAGE -->
+      <ng-container *ngIf="selectedPost === 3">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            
+            <h2 class="post-title">Beyond Code: Exploring Systems Thinking, Design Automation, and the Future of Digital Transformation</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">28 September 2026</span>
+              <span class="post-category">Digital Transformation · Systems Thinking · Artificial Intelligence · Human-Centred Design</span>
+            </div>
+            
+            <div class="post-content">
+              <p><em>What happens when we stop asking what technology can do and start asking what it should do, who it should serve, and how it can transform the world around us?</em></p>
+              
+              <p>On Monday, 28 September 2026, I had the privilege of attending a Design Automation Workshop at the Namibia University of Science and Technology (NUST), hosted by Dr Gereon Koch Kapuire and featuring guest lecturer Professor Mridu Kashyap, Assistant Professor of Practice in Computer Science at Iowa State University.</p>
+              
+              <p>The workshop brought together fellow Computer Science and Informatics students for an engaging exploration of digital transformation, design systems, automation, emerging technologies, and the process of turning complex problems into practical solutions.</p>
+              
+              <p>For me, this was more than an academic workshop. It was an opportunity to explore concepts I genuinely enjoy, challenge my existing understanding of technology, and think more deeply about how we can use our knowledge to address the needs of our society.</p>
+              
+              <p>I left with a notebook full of ideas, a mind challenged by unfamiliar concepts, and an even greater curiosity about the future of computing.</p>
+
+              <h3 class="section-heading">1. Thinking beyond the code: The power of systems thinking</h3>
+              <p>One of the aspects I appreciated most about the workshop was its emphasis on systems thinking — an approach I have always found fascinating.</p>
+              <p>As developers, it is easy to focus on the immediate problem in front of us. A client needs an application, an organization needs a database, or a business wants to automate a process. Our instinct is often to identify the technology, write the code, and deliver the solution.</p>
+              <p>But systems thinking challenges us to look at the bigger picture.</p>
+              <p>What caused the problem in the first place? Who is affected by it? What other processes depend on it? How might solving one problem create another? And what happens to the wider system once our solution is introduced?</p>
+              <p>These questions fundamentally change how we approach software development. A hospital management system, for example, is not simply a collection of screens, databases, and APIs. It exists within a much larger ecosystem involving patients, healthcare professionals, administrators, medical records, resources, policies, and sometimes unreliable internet connectivity.</p>
+              <p>A technically impressive system can still fail if it ignores the realities of the people expected to use it. This was one of my biggest takeaways: we should not design technology in isolation from the systems, people, and environments in which it operates.</p>
+              <p>For a country like Namibia, where communities have different levels of connectivity, access to devices, infrastructure, and digital literacy, this perspective is particularly important. Our solutions must reflect the realities of our society rather than simply imitate what has worked elsewhere.</p>
+
+              <h3 class="section-heading">2. Human-centred design: Understanding the person behind the problem</h3>
+              <p>Another important theme was the relationship between design, user experience (UX), and digital transformation.</p>
+              <p>One idea that particularly resonated with me was the importance of meeting users in the moments when they actually need a service. The closer a service comes to understanding the user's context and reducing unnecessary effort, the more naturally useful and accessible it can become.</p>
+              <p>Consider applying for a driving licence. The process might involve obtaining information, completing forms, making payments, scheduling appointments, travelling to an office, and checking application progress. Digitizing only the application form would help, but it would not necessarily transform the entire experience.</p>
+              <p>A more thoughtful approach would examine the complete journey: how people discover the requirements, what documents they need, where delays occur, how they receive updates, and what happens when they lack internet access or encounter a problem.</p>
+              <p>That is the difference between merely putting an existing process online and genuinely rethinking how a service should work.</p>
+              <p>We explored how digital transformation connects with business processes, software architecture, operating models, organizational culture, and user needs. I found this especially valuable because it reinforced the idea that good design is not simply about producing attractive interfaces. It is about understanding people well enough to create solutions that are useful, intuitive, accessible, and effective.</p>
+              <p>A phrase I took away from this discussion was the importance of <em>meeting users in the moment</em>. The best technology often feels almost effortless to its users because the complexity has been carefully managed behind the scenes.</p>
+
+              <h3 class="section-heading">3. Digital transformation and the evolution of technology</h3>
+              <p>The workshop also explored digital transformation, industry trends, and how emerging technologies reshape the way organizations operate.</p>
+              <p>We examined how technologies develop, how new opportunities emerge, and why some organizations successfully adapt while others struggle. One important lesson was that digital transformation is not simply about adopting the latest technology. It requires reconsidering the processes, business models, operating structures, and organizational cultures that determine how technology creates value.</p>
+              <p>An organization can invest in sophisticated software and still fail to improve its services if its underlying processes remain inefficient or its people are not equipped to use the new system effectively.</p>
+              <p>We also discussed how organizations such as Deloitte communicate and interpret emerging technology trends. This made me think about the importance of distinguishing between a technology that is receiving attention and one that can genuinely solve a problem. As developers, we must learn to ask not only what is new, but what is useful, what is sustainable, and what creates measurable value.</p>
+
+              <h3 class="section-heading">4. Design automation: From ideas to intelligent systems</h3>
+              <p>Design automation was another fascinating area of the workshop. At its core, design automation involves using systems, rules, data, and technology to reduce repetitive work, support decisions, and make certain processes more efficient.</p>
+              <p>However, automation is not simply about making a process faster. It is also about understanding which parts of a process should be automated, which require human judgement, and how the overall experience can be improved.</p>
+
+              <p><strong>Netflix: Predicting what users might want next</strong><br>
+              Netflix provides an interesting example of how data and machine learning can support personalized user experiences. A streaming platform has an enormous catalogue of content, but each user has limited time and different preferences. Recommendation systems help narrow that catalogue by using patterns in viewing activity, content characteristics, and other signals to estimate what a user might enjoy.</p>
+              <p>The important design challenge is not simply producing a prediction. It is presenting relevant choices in a way that helps users discover content without overwhelming them. This is where software engineering, data science, user experience, and business strategy intersect.</p>
+
+              <p><strong>Amazon: Blending the digital and physical worlds</strong><br>
+              Amazon's Just Walk Out retail concept illustrates a different kind of transformation: using technology to reduce friction in a physical shopping experience. Depending on the implementation, such systems combine technologies such as computer vision, sensor data, machine learning, and transaction processing to help determine which items shoppers take and charge them accordingly.</p>
+              <p>From a systems-thinking perspective, the interesting part is the coordination required behind what appears to be a simple experience. The customer sees a convenient shopping journey. Behind it, multiple technical components must work together reliably, while the business must consider accuracy, privacy, operational costs, and how to handle exceptional situations.</p>
+
+              <h3 class="section-heading">5. Spatial computing and the rapid evolution of AI</h3>
+              <p>One of the concepts that really captured my imagination was spatial computing and the blending of the digital and physical worlds.</p>
+              <p>Spatial computing broadly refers to technologies that allow digital information and experiences to interact with our understanding of physical space. Depending on the application, this can involve augmented reality, virtual reality, mixed reality, spatial mapping, and interactions with the surrounding environment.</p>
+              <p>We also explored how different AI systems are developed for different needs. Rather than thinking of AI as one universal technology, we can understand it as a growing collection of specialized systems designed for particular tasks, contexts, and users.</p>
+              <p>This made me reflect on how quickly the field has progressed, bringing to mind Moore's Law — the historical observation that computing power doubles rapidly over time. Today, advances in AI, hardware, cloud infrastructure, and software development are changing what individuals and organizations can build.</p>
+
+              <h3 class="section-heading">6. "Autonomy is always balanced with orchestration"</h3>
+              <blockquote class="post-quote">
+                "Autonomy is always balanced with orchestration."
+              </blockquote>
+              <p>Of all the ideas discussed, this was one of the statements that stayed with me the most. I find this concept particularly interesting because it captures a challenge that appears in both software architecture and human organizations.</p>
+              <p>Autonomy is the ability of an individual, team, or system to make decisions and perform its responsibilities independently. Orchestration is the coordination that ensures those independent activities work together toward a shared objective.</p>
+              <p>Imagine a software development team in which every developer is free to choose their own tools, design their own interfaces, and implement features however they wish. Without shared standards, security requirements, and coordination, the application may fragment. Conversely, centralizing every minor decision stops innovation. Neither extreme is ideal.</p>
+              <p>Independence creates possibilities; coordination turns those possibilities into collective progress.</p>
+
+              <h3 class="section-heading">7. The Triple-S framework: Understanding network effects</h3>
+              <p>Another concept that expanded my thinking was the Skillification, Socialization, and Segmentation framework (Triple-S framework) developed by Michael Schrage at the MIT Initiative on the Digital Economy.</p>
+              <ul>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Segmentation:</strong> Understanding who your users are, recognizing that different user groups encounter different challenges.</li>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Socialization:</strong> Understanding how users interact, communicate, collaborate, and create shared value within a network.</li>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Skillification:</strong> Helping users develop new capabilities through tools, guidance, and learning resources.</li>
+              </ul>
+              <p>The real value lies in how the three components reinforce one another to build a continuous cycle of learning and value creation.</p>
+
+              <h3 class="section-heading">8. What Spotify taught us about autonomous teams</h3>
+              <p>We also discussed Spotify's well-known approach to autonomous development squads — small, cross-functional teams with direct responsibility for specific product features. This approach encourages ownership, experimentation, and rapid feedback loops, proving that organizational structure is just as vital to software development as technical tools.</p>
+
+              <h3 class="section-heading">9. Innovation requires responsibility: Just because AI can, should it?</h3>
+              <blockquote class="post-quote">
+                "Just because an AI system can do something, does that mean it should?"
+              </blockquote>
+              <p>Technical capability alone does not establish whether using a technology is appropriate. We must also evaluate purpose, consent, privacy, fairness, reliability, accountability, and potential consequences. Responsible innovation requires us to evaluate not only what a system can accomplish, but also what its use means for the people affected by it.</p>
+
+              <h3 class="section-heading">10. The challenges of learning something new</h3>
+              <p>Moving between design automation, network effects, spatial computing, organizational structures, AI, and systems thinking required concentration and questioning existing assumptions. Learning does not always mean understanding everything immediately — sometimes it means staying curious long enough for unfamiliar ideas to become clearer.</p>
+
+              <h3 class="section-heading">11. From theory to practice: Designing solutions for Namibia</h3>
+              <p>The workshop concluded with a collaborative group challenge. My team explored the idea of an <strong>offline AI system designed to support people in rural communities</strong>.</p>
+              <p>In areas where internet connectivity is limited, designing a system that depends entirely on a continuous cloud connection unintentionally excludes people. An offline-capable AI solution could deliver localized knowledge, advice, and service assistance directly on available devices.</p>
+              <p>Our role as emerging technologists in Namibia is not merely to consume innovation, but to adapt and design solutions around our own societal realities.</p>
+
+              <h3 class="section-heading">12. Looking ahead: The kind of technologist I want to become</h3>
+              <blockquote class="post-quote">
+                "The future does not belong only to those who can build the most advanced technology. It also belongs to those who understand what is worth building, whom it should serve, and how it can make a meaningful difference."
+              </blockquote>
+              <p>Computer Science is much broader than programming languages and algorithms. As I continue my journey in Software Development, I want to keep asking better questions, thinking holistically, and building with purpose, not just possibility.</p>
+
+              <!-- External References & Further Reading -->
+              <div class="post-resources">
+                <h4 class="resources-title">For Readers Who Want to Explore Further</h4>
+                <p style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 20px;">
+                  Explore the profiles, publications, and foundational concepts discussed in this article:
+                </p>
+
+                <div class="resource-links">
+                  <a href="https://catalog.iastate.edu/faculty/" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    🎓 Prof. Mridu Kashyap — Iowa State Faculty Directory
+                  </a>
+                  <a href="https://patents.justia.com/patent/12373893" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    💡 Conversational AI & ML Systems Patent (Co-Invented by Prof. Mridu Kashyap)
+                  </a>
+                  <a href="https://fci.nust.na/dr-gereon-koch-kapuire" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    🏛️ Dr Gereon Koch Kapuire — NUST Academic Profile
+                  </a>
+                  <a href="https://www.nust.na/vsat-tech-kunene-communities" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    📡 VSAT Technology in Kunene Communities — NUST Impact Feature
+                  </a>
+                  <a href="https://careers.com.na/careers/how-a-fathers-advice-shaped-a-nust-academics-future-nmh013986-4015-17403" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    📰 "How a Father's Advice Shaped an Academic's Future" — Career Feature
+                  </a>
+                  <a href="https://ide.mit.edu/wp-content/uploads/2017/10/Rethinking-Networks_0.pdf" target="_blank" rel="noopener noreferrer" class="resource-btn">
+                    📄 Triple-S Framework Research — "Rethinking Networks" (MIT IDE)
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
+      <!-- VIEW 7: INDABAX 2026 READING PAGE -->
+      <ng-container *ngIf="selectedPost === 6">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            
+            <h2 class="post-title">IndabaX 2026: Where Technology, Sustainability, and Innovation Meet</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">Early 2026</span>
+              <span class="post-category">Artificial Intelligence · Sustainability · Interdisciplinary Innovation · Growth</span>
+            </div>
+            
+            <div class="post-content">
+              <p><em>Reflecting on a season of learning, interdisciplinary discovery, and meaningful growth.</em></p>
+
+              <h3 class="section-heading">Beyond the Boundaries of Computer Science</h3>
+              <p>Sometimes, the most valuable learning experiences are the ones that take us beyond what we already know.</p>
+              <p>As a Computer Science student specializing in Software Development, much of my academic and professional journey revolves around programming, system design, software engineering, and finding technological solutions to everyday problems. But as I continue growing, I am increasingly realizing that technology does not exist in isolation. Its greatest value often emerges when it intersects with other disciplines, addresses real-world challenges, and contributes to something larger than the systems we build.</p>
+              <p>My experience around IndabaX 2026 formed part of a particularly meaningful season in this journey. The first two months of the year brought opportunities to explore artificial intelligence, collaborate with people from different professional backgrounds, and reflect on how technology can contribute to sustainable development.</p>
+              <p>More than simply expanding my technical knowledge, these experiences challenged me to think differently about the role I want to play in the technology industry.</p>
+
+              <h3 class="section-heading">A Season of Learning and New Perspectives</h3>
+              <p>The beginning of 2026 was marked by several opportunities that broadened my understanding of innovation and its place in society.</p>
+              <p>Through technology-focused learning opportunities, collaboration, and exposure to professionals working in different fields, I began thinking more deeply about the relationship between technological advancement and the challenges facing our communities.</p>
+              <p>Artificial intelligence, for example, is often discussed in terms of automation, productivity, and software development. Yet its potential extends much further. AI and data-driven systems can support decision-making, help people interpret complex information, and create new approaches to problems that traditional methods may struggle to address.</p>
+              <p>These possibilities make continuous learning particularly important. Technology evolves quickly, but understanding the problems we want to solve requires curiosity, critical thinking, and an appreciation of the world beyond our immediate area of expertise.</p>
+              <p>This was one of the broader lessons I carried with me during this period: being a technology professional is not only about knowing how to build something, but also understanding why it should be built and whom it should serve.</p>
+
+              <h3 class="section-heading">Discovering the Connection Between Technology and Sustainability</h3>
+              <p>One of the most eye-opening experiences during this season was helping organize and host the Biodiversity Finance Facility validation workshop, which brought together stakeholders working toward biodiversity conservation and sustainable development.</p>
+              <p>Contributing to the organization and documentation of the workshop gave me an opportunity to engage with a field that sits outside the conventional boundaries of software development.</p>
+              <p>Before this experience, biodiversity was not necessarily something I would immediately associate with my work as a Computer Science student. However, the discussions helped me appreciate that biodiversity is much more than an environmental concern. It is closely connected to economic resilience, food security, climate stability, governance, and the long-term well-being of society.</p>
+              <p>Healthy ecosystems support livelihoods, industries, and communities. Protecting them requires not only environmental awareness but also effective financing, sound policies, reliable information, accountability, and long-term planning.</p>
+              <p>That realization prompted me to consider a question from a technological perspective: How can software, artificial intelligence, and data-driven systems contribute to protecting the natural resources on which our societies depend?</p>
+              <p>I began thinking about possibilities such as digital monitoring systems, data visualization platforms, transparent financial tracking, and tools that could help stakeholders measure progress and make more informed decisions.</p>
+              <p>These are areas worth exploring because the impact of technology should not be measured only by how sophisticated a system is, but also by whether it helps solve a meaningful problem.</p>
+              <p>The experience reminded me that some of the most interesting opportunities for software developers may exist in fields they have not yet considered.</p>
+
+              <h3 class="section-heading">Artificial Intelligence, Collaboration, and Innovation</h3>
+              <p>Another important part of this period was participating in a virtual hackathon hosted by IBM.</p>
+              <p>The experience strengthened my appreciation for artificial intelligence, collaborative problem-solving, and the process of developing ideas under time constraints. Hackathons provide a valuable environment for bringing ideas into focus, exchanging perspectives, and exploring how technology might be applied to practical challenges.</p>
+              <p>They also highlight an important truth about innovation: meaningful solutions rarely emerge from technical knowledge alone. They require people to ask the right questions, challenge assumptions, communicate effectively, and work together toward a shared objective.</p>
+              <p>For me, this reinforced the importance of remaining open to new approaches and learning from people whose experiences differ from my own.</p>
+              <p>As developers, we can become so focused on implementing a particular feature or solving a technical problem that we overlook the wider context. Collaborative environments encourage us to step back, reconsider our assumptions, and recognize possibilities we might not have discovered independently.</p>
+              <p>Artificial intelligence continues to create exciting opportunities, but its value ultimately depends on how thoughtfully people apply it. The challenge is not simply to adopt new technologies because they are available; it is to understand where they are useful, where their limitations lie, and how they can be applied responsibly.</p>
+
+              <h3 class="section-heading">Growth Through Real-World Software Development</h3>
+              <p>Alongside these experiences, I continued developing my skills through my work at Datalani Technology.</p>
+              <p>Working on real-world software projects has been an important part of my transition from learning Computer Science in an academic environment to understanding how software development operates in practice.</p>
+              <p>It has encouraged me to think more carefully about system design, clean coding practices, collaboration, and client-focused development. Building software is not merely about writing code that works. It also involves considering maintainability, usability, the needs of the people who will use the product, and the practical challenges that arise throughout development.</p>
+              <p>These experiences have helped me appreciate the difference between understanding a concept in theory and applying it to a real project.</p>
+              <p>They have also reinforced the importance of continuous improvement. Every project presents an opportunity to identify weaknesses, refine an approach, learn a new technique, and become more deliberate in the decisions I make as a developer.</p>
+
+              <blockquote class="post-quote">
+                "Professional growth is not always defined by the number of technologies one knows. It is also reflected in the ability to think critically, adapt to changing requirements, communicate ideas clearly, and take responsibility for the quality and usefulness of one's work."
+              </blockquote>
+
+              <h3 class="section-heading">The Value of Connecting With People Beyond Your Field</h3>
+              <p>One of the most rewarding aspects of this season has been the opportunity to meet and engage with inspiring people across technology, sustainability, and development.</p>
+              <p>These interactions have reinforced the value of interdisciplinary collaboration. A software developer, an environmental specialist, a financial professional, and a policy practitioner may approach a challenge from very different perspectives. Yet when those perspectives come together, they can reveal opportunities that would be difficult to identify from a single viewpoint.</p>
+              <p>For example, a developer may understand how to build a data platform, while an environmental specialist understands what information needs to be monitored, and a policymaker understands how that information could support decisions. Bringing these perspectives together can help turn a technical idea into something genuinely useful.</p>
+
+              <p>This is the kind of collaboration I hope to continue pursuing throughout my career.</p>
+              <p>I believe that building meaningful professional relationships is not simply about expanding a network. It is about learning from others, sharing knowledge, discovering common interests, and remaining open to opportunities that emerge when people work toward shared goals.</p>
+              <p>Growth is rarely an isolated process. It is strengthened by the ideas, experiences, and encouragement we receive from the people around us.</p>
+
+              <h3 class="section-heading">Navigating Challenges While Continuing to Grow</h3>
+              <p>Of course, this season has not been without its challenges.</p>
+              <p>Balancing academic responsibilities, professional commitments, and opportunities to explore unfamiliar disciplines has required me to manage my time carefully and adapt to competing demands.</p>
+              <p>There is always more to learn, more to build, and another opportunity to pursue. At times, this can make the journey feel overwhelming, particularly when trying to make progress across several areas simultaneously.</p>
+              <p>However, I am learning to view these challenges as opportunities to become more disciplined, intentional, and resilient.</p>
+              <p>Stepping into unfamiliar spaces can be uncomfortable. Engaging with new concepts, working with people from different backgrounds, and exploring fields outside one's specialization all require a willingness to learn without expecting to have every answer immediately.</p>
+              <p>That willingness matters. I do not need to know everything today to make meaningful progress tomorrow. What matters is remaining curious, taking deliberate steps forward, and being willing to learn from both successes and setbacks.</p>
+
+              <h3 class="section-heading">Looking Ahead: Building Technology That Matters</h3>
+              <p>As I continue my journey in Computer Science and Software Development, I am becoming increasingly interested in exploring how my technical background can intersect with other fields that shape our societies.</p>
+              <p>Biodiversity conservation, sustainable development, financial accountability, and artificial intelligence may seem like distinct areas, but they share a common need for effective information systems, thoughtful decision-making, and innovative approaches to complex problems.</p>
+              <p>Namibia, like many countries, faces challenges that require collaboration across disciplines. Technology cannot solve every problem on its own, but when developed with a clear understanding of people's needs and the realities of the environment in which it will be used, it can become a powerful tool for progress.</p>
+              <p>I want to continue developing the technical skills necessary to build reliable software while also strengthening my ability to understand the broader challenges those systems are meant to address.</p>
+              <p>That means looking beyond code, asking better questions, learning from different industries, and considering the long-term impact of the solutions I help create.</p>
+              <p>My goal is not simply to become a better developer. It is to become a developer who understands the importance of building useful, responsible, and meaningful technology.</p>
+
+              <!-- 1-Image Event Gallery / Highlight -->
+              <h3 class="section-heading">Event Highlights</h3>
+              <div class="article-gallery">
+                <img src="indabax-2026.jpg" alt="IndabaX 2026 Event Session" class="gallery-img full-width-img" (click)="openLightbox('indabax-2026.jpg')" onerror="this.style.display='none'">
+              </div>
+
+              <h3 class="section-heading">Final Reflection: Growth Is About More Than What You Know</h3>
+              <blockquote class="post-quote">
+                "The most meaningful innovation happens when knowledge meets purpose. In a world increasingly shaped by technology, the real opportunity lies not merely in keeping up with innovation, but in helping direct it toward a better future."
+              </blockquote>
+
+              <p>Looking back on this period, I am grateful for the opportunities to learn, collaborate, and explore ideas beyond the classroom.</p>
+              <p>From engaging with artificial intelligence and participating in a virtual hackathon to contributing to conversations around biodiversity finance and continuing my professional development, these experiences have reminded me that learning is a continuous process.</p>
+              <p>Each experience has offered a different perspective, but together they have reinforced one central lesson: the most meaningful innovation happens when knowledge meets purpose.</p>
+              <p>I am excited to see how these interests continue to develop throughout the rest of 2026 and beyond. There is still much to learn, many challenges to explore, and plenty of room to grow.</p>
+              <p>For now, I remain committed to staying curious, embracing collaboration, and developing solutions that can make a positive difference.</p>
+
+              <!-- External References & Further Reading -->
+              <div class="post-resources">
+                <h4 class="resources-title">Related Posts & Reflections</h4>
+                <div class="resource-links">
+                  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7490720848056737792/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrqfKcBI6GkHiACDN8_DcQc3JCPKFAuJEc&highlightedUpdateUrn=urn%3Ali%3Aactivity%3A7490720848056737792&highlightedUpdateType=SOCIAL_SHARE&origin=SOCIAL_SHARE" target="_blank" rel="noopener noreferrer" class="resource-btn linkedin-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    My IndabaX 2026 Reflection Post (Part 1)
+                  </a>
+                  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7492961348742553601/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrqfKcBI6GkHiACDN8_DcQc3JCPKFAuJEc&highlightedUpdateUrn=urn%3Ali%3Aactivity%3A7492961348742553601&highlightedUpdateType=SOCIAL_SHARE&origin=SOCIAL_SHARE" target="_blank" rel="noopener noreferrer" class="resource-btn linkedin-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    My IndabaX 2026 Reflection Post (Part 2)
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
+      <!-- VIEW 5: WINDHOEK CENTRAL PRIMARY SCHOOL AI TALK READING PAGE -->
+      <ng-container *ngIf="selectedPost === 4">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            
+            <h2 class="post-title">Shaping the Next Generation: Teaching Young Minds to Use Artificial Intelligence Responsibly</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">7 July 2026 | Windhoek Central Primary School, Namibia</span>
+              <span class="post-category">Grade 7 Awareness Day - Empowering Grade 7 Learners for a Healthy, Safe and Successful Future</span>
+            </div>
+            
+            <div class="post-content">
+              <p><em>What does it mean to prepare young people for the future when technology can generate answers in seconds? Is it enough to teach them how to use Artificial Intelligence, or must we also teach them when to question it, when to challenge it, and when to think for themselves?</em></p>
+              
+              <p>On 7 July 2026, I had the privilege of being invited as a guest speaker at Grade 7 Awareness Day - Empowering Grade 7 Learners for a Healthy, Safe and Successful Future, hosted at Windhoek Central Primary School.</p>
+              
+              <p>The event provided an opportunity to engage with Grade 7 learners preparing to transition into high school, a significant stage in their educational journey. As they prepare to encounter new academic challenges, responsibilities, and experiences, I had the opportunity to speak to them about a subject that is becoming increasingly relevant to their generation: the ethical and responsible use of Artificial Intelligence (AI).</p>
+              
+              <p>As a Computer Science student specializing in Software Development, I spend much of my time exploring technology, understanding how it works, and discovering the possibilities it creates. Yet this experience reminded me that being involved in technology is about more than writing code, building applications, or keeping up with the latest innovations. It is also about helping people understand technology, recognize its limitations, and use it in ways that benefit them.</p>
+              
+              <p>My objective was simple: to help the learners understand that while AI can be an incredibly useful learning tool, it should support their thinking rather than replace it.</p>
+              
+              <p>What followed was an enjoyable, interactive, and genuinely meaningful experience filled with questions, laughter, relatable examples, and conversations about the role technology will play in their futures.</p>
+
+              <h3 class="section-heading">1. Making Artificial Intelligence understandable to young minds</h3>
+              <p>One of the most interesting aspects of this experience was finding a way to explain a complex technological subject to a young audience.</p>
+              <p>Artificial Intelligence has rapidly become part of everyday life. From chatbots and recommendation systems to educational assistants and content-generation tools, AI is changing how people access information and complete tasks.</p>
+              <p>However, explaining its implications to Grade 7 learners required a different approach from the technical discussions I might have in a university classroom.</p>
+              <p>Rather than introducing complicated terminology, I focused on familiar situations they could recognize from their schoolwork and everyday experiences.</p>
+              <p>We discussed how AI can help explain difficult subjects, suggest ideas, answer questions, and make learning more accessible. But we also explored what happens when learners begin relying on it to complete every assignment, solve every problem, or generate every answer without making an effort to understand the work themselves.</p>
+              <p>I wanted them to recognize that completing an assignment and actually learning something are not necessarily the same thing.</p>
+              <p>A learner might submit an excellent essay generated entirely by AI, yet struggle to explain its main arguments. Another might use AI to understand the topic, develop an outline, write their own essay, and improve it using feedback. Although both learners may produce a finished assignment, the second has actively participated in the learning process.</p>
+              <p>That distinction was at the heart of my discussion.</p>
+              <p>As learners prepare for high school, they will encounter increasingly challenging subjects, examinations, projects, and independent assignments. These experiences are intended to help them develop knowledge, confidence, creativity, and problem-solving abilities.</p>
+              <p>If technology consistently does all the thinking for them, they risk missing the very experiences that help those abilities develop.</p>
+              <p>My message was not that AI is bad. It was that we must learn to use it wisely.</p>
+
+              <h3 class="section-heading">2. The story of Max and the Monster-Lifter: When your robot does all the work</h3>
+              <p>One of the ways I made the session engaging was through storytelling, humour, and imaginative examples.</p>
+              <p>I used the story of a boy named Max who wanted to become stronger, faster, and more capable. To help him, his parents gave him an incredibly powerful robot assistant called Kasi-Bot 3000.</p>
+              <p>Kasi-Bot was extraordinary. It could lift enormous weights, run at incredible speeds, and carry practically anything Max needed.</p>
+              <p>But there was a catch.</p>
+              <p>Whenever Max went to exercise, Kasi-Bot did all the work. When Max wanted to lift weights, the robot lifted them. When Max wanted to run, the robot carried him. Even when Max needed to carry his schoolbag, Kasi-Bot was there to do it for him.</p>
+              <p>At first, Max thought this was fantastic. Everything was getting done, and he barely had to make an effort.</p>
+              <p>But after months of relying on the robot, Max had a problem: while Kasi-Bot was becoming stronger, Max was not developing his own strength.</p>
+              <p>Eventually, the robot's battery ran out. When Max suddenly had to do something for himself, he discovered that he had not developed the abilities he thought he was gaining.</p>
+              <p>The story was humorous, but it illustrated a very important lesson: having something do the work for you is not the same as developing the ability to do it yourself.</p>
+              <p>I used the robot's physical strength as an analogy for the development of our brains. Just as physical exercise helps our muscles become stronger, reading, practising, writing, reasoning, and solving problems help us develop our mental abilities.</p>
+              <p>When we struggle with a mathematics problem, work through a difficult essay, or try to understand a new concept, our brains are actively learning. The process can be uncomfortable at times, but that effort is part of how we develop our abilities.</p>
+              <p>If we allow AI to do all the thinking while we simply copy its answers, we can miss valuable opportunities to practise those skills.</p>
+              <p>Of course, nobody expects learners to struggle unnecessarily or refuse help when they need it. The point is to use assistance in a way that helps them become more capable, rather than more dependent.</p>
+              <p>The story of Max and Kasi-Bot provided a fun way to communicate this message without making the discussion feel like a lecture.</p>
+              <p>Sometimes, an imaginary robot with superhuman strength can explain a real-world problem better than a complicated scientific explanation ever could!</p>
+
+              <h3 class="section-heading">3. AI is powerful, but it is not always right</h3>
+              <p>Another important point I emphasized was that Artificial Intelligence can make mistakes.</p>
+              <p>One of the risks of modern AI tools is that they can produce answers that sound confident and convincing, even when those answers contain factual errors, misleading information, or flawed reasoning.</p>
+              <p>For young learners, this is particularly important. When a tool responds quickly and presents information in a polished manner, it can be tempting to assume that everything it says must be correct.</p>
+              <p>But confidence is not the same as accuracy.</p>
+              <p>Imagine a learner asking an AI tool to solve a mathematics problem. The system provides an answer, and the learner copies it into their homework without checking the method. If the answer is incorrect, the learner may unknowingly submit the wrong work. Even if the answer happens to be correct, they may still fail to understand how the problem was solved.</p>
+              <p>Now imagine a different approach.</p>
+              <p>The learner asks the AI to explain the method step by step, attempts the problem independently, compares their work with the explanation, and checks the answer using their textbook or teacher's guidance.</p>
+              <p>In this scenario, AI becomes an opportunity to learn rather than simply a source of answers.</p>
+              <p>I wanted the learners to understand that they should question information, verify important facts, and use their own judgement.</p>
+              <p>These habits are not only useful for school. They are essential life skills in a world where people encounter enormous amounts of information online, not all of which is accurate or trustworthy.</p>
+              <p>The goal is not to believe everything technology tells us. The goal is to understand enough to evaluate what it tells us.</p>
+
+              <h3 class="section-heading">4. Using AI like a calculator, not a replacement for your brain</h3>
+              <p>One of the simplest ways to understand my perspective is to compare AI with a calculator.</p>
+              <p>Calculators are incredibly useful. They allow us to perform calculations quickly, check answers, and work with mathematical operations that might otherwise take much longer.</p>
+              <p>But using a calculator does not mean we no longer need to understand mathematics.</p>
+              <p>We still need to know which operation to perform, how to interpret the result, and whether the answer makes sense in the context of the problem.</p>
+              <p>AI can be approached in a similar way.</p>
+              <p>It can help learners brainstorm ideas, clarify unfamiliar concepts, practise languages, generate revision questions, and receive feedback on their work.</p>
+              <p>The important question is whether the learner remains actively involved.</p>
+              <p>Instead of asking AI to write an entire essay, a learner could ask it to explain the essay question, suggest areas to research, or identify weaknesses in a draft they wrote themselves.</p>
+              <p>Instead of asking it to solve every mathematics question, they could request a hint, attempt the problem independently, and then review the explanation.</p>
+              <p>Instead of copying a summary of a science topic, they could ask AI to quiz them and explain the questions they get wrong.</p>
+              <p>These approaches make AI a learning companion rather than a substitute for learning.</p>
+              <p>They also encourage learners to take responsibility for their education instead of expecting technology to do everything on their behalf.</p>
+              <p>The best use of AI is not necessarily to make us think less. It is to help us learn more, understand better, and think more effectively.</p>
+
+              <h3 class="section-heading">5. The ethics of AI: Just because we can, should we?</h3>
+              <p>Beyond academic performance, the discussion also touched on the importance of responsible technology use.</p>
+              <p>AI gives people the ability to generate text, images, ideas, and answers with remarkable speed. However, the ability to do something does not automatically mean that doing it is appropriate.</p>
+              <p>Consider academic honesty. If a learner submits work generated entirely by AI and claims to have completed it independently, they may misrepresent their understanding and violate their school's academic rules.</p>
+              <p>Consider privacy. Sharing personal details, photographs, passwords, or sensitive information with unfamiliar AI tools can create risks that young people may not fully appreciate.</p>
+              <p>Consider misinformation. AI-generated answers may contain inaccuracies, and AI-generated images or content can sometimes make false information appear authentic.</p>
+              <p>These examples demonstrate why digital literacy must involve more than knowing which buttons to press or which applications to download.</p>
+              <p>We must also understand the responsibilities that come with using technology.</p>
+              <p>For learners, this means following school rules, being honest about AI assistance, protecting personal information, checking important claims, and understanding when a task requires their own independent work.</p>
+              <p>For developers and technology professionals, it means thinking carefully about the systems we build, the information they process, and the consequences they may have for the people who use them.</p>
+              <p>Responsible AI use is not simply a technical issue. It is a matter of judgement, integrity, and accountability.</p>
+
+              <h3 class="section-heading">6. An interactive session filled with curiosity and laughter</h3>
+              <p>What made the experience particularly memorable was the learners themselves.</p>
+              <p>Rather than simply listening passively, several learners asked questions about why relying too heavily on AI could be harmful. They wanted to understand why they should make an effort to complete schoolwork when technology could generate answers almost instantly.</p>
+              <p>These questions created opportunities to explain the concepts from different angles, introduce relatable examples, and encourage the learners to think critically about their own habits.</p>
+              <p>I genuinely enjoyed the interaction.</p>
+              <p>The use of humour helped make the conversation approachable, while the questions reminded me that young learners are often more than willing to engage with complex issues when those issues are presented in a way they can understand.</p>
+              <p>It was rewarding to see how a topic that might initially sound technical could become a lively conversation about learning, independence, and making good decisions.</p>
+              <p>The experience also challenged me to communicate more effectively. Understanding AI from a Computer Science perspective is one thing; explaining its benefits and limitations to a Grade 7 learner is another.</p>
+              <p>It requires patience, creativity, empathy, and the ability to recognize which details matter most to the audience.</p>
+              <p>This was an important reminder that communication is a skill worth developing, particularly for anyone who hopes to work in technology, education, leadership, or community development.</p>
+
+              <h3 class="section-heading">7. Preparing learners for a healthy, safe, and successful future</h3>
+              <p>The theme of the event — Empowering Grade 7 Learners for a Healthy, Safe and Successful Future — made the discussion especially meaningful.</p>
+              <p>The transition into high school is an important stage in a young person's life. Learners begin encountering new academic expectations, greater independence, different social environments, and decisions that can influence their future development.</p>
+              <p>Technology is increasingly part of that journey.</p>
+              <p>AI can help learners access explanations, explore interests, and discover new ways of learning. However, they also need to understand how to manage distractions, protect their information, recognize unreliable content, and maintain responsibility for their own work.</p>
+              <p>A healthy relationship with technology involves knowing when to use it, when to question it, and when to step away from it and work through something independently.</p>
+              <p>We should encourage young people to see technology as something they can learn to control and use purposefully, rather than something that should control how they think, work, and learn.</p>
+              <p>That balance is particularly important as AI tools become more capable and accessible.</p>
+              <p>Preparing learners for the future does not mean teaching them to fear technological change. It means equipping them with the knowledge and judgement to navigate it confidently.</p>
+
+              <h3 class="section-heading">8. Why this matters for Namibia's future</h3>
+              <p>Perhaps the most meaningful part of this experience was the opportunity to contribute, in a small way, to the development of young Namibians.</p>
+              <p>Our country is entering a period in which digital skills, AI literacy, and technological innovation will increasingly influence education, business, public services, and employment.</p>
+              <p>The learners I spoke to will become the students, professionals, entrepreneurs, developers, educators, and leaders who shape Namibia in the years ahead.</p>
+              <p>Some may eventually build software, develop AI systems, establish businesses, or use technology to address challenges in their own communities.</p>
+              <p>But before any of that happens, they need opportunities to develop the foundational abilities that will help them succeed: curiosity, critical thinking, creativity, communication, discipline, and independent judgement.</p>
+              <p>Access to technology alone is not enough. We must also nurture the ability to use it thoughtfully.</p>
+              <p>For Namibia to benefit meaningfully from technological advancement, we need people who can do more than operate digital tools. We need people who can question assumptions, identify problems, evaluate possible solutions, and understand the consequences of their decisions.</p>
+              <p>That development begins early.</p>
+              <p>It begins when a learner is encouraged to solve a problem instead of immediately being given the answer. It begins when a teacher invites a student to explain their reasoning. It begins when young people learn that making mistakes is part of the process of understanding something new.</p>
+              <p>And it continues when we create opportunities for them to explore technology without losing confidence in their own abilities.</p>
+              <p>This is why I believe conversations about responsible AI use are so important. We are not simply teaching learners how to use a new tool; we are helping them develop habits that will remain valuable long after today's technology has changed.</p>
+
+              <h3 class="section-heading">9. What the experience taught me</h3>
+              <ul>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Communication is a skill in its own right:</strong> Understanding a subject and explaining it clearly to someone else are two different abilities. The experience challenged me to simplify complex ideas without losing their essential meaning.</li>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Empathy matters when communicating technology:</strong> Effective explanations begin with understanding your audience, their experiences, and the language they are comfortable using. What works in a university lecture may not work for a group of primary school learners.</li>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Technology professionals have a role to play beyond building software:</strong> We can contribute to digital literacy, community education, responsible AI adoption, and helping people understand the technologies increasingly shaping their lives.</li>
+                <li style="color: #cbd5e1; margin-bottom: 10px;"><strong>Active thinkers over passive consumers:</strong> Young people should be encouraged to become active thinkers and creators rather than passive consumers of information.</li>
+              </ul>
+              <p>Technology will continue to evolve. The AI tools available today will change, and entirely new capabilities will emerge. Yet the ability to ask thoughtful questions, reason independently, learn from mistakes, and make responsible decisions will remain essential.</p>
+              <p>I left the experience with a stronger appreciation for the importance of sharing knowledge and using my own developing expertise to contribute positively to the community.</p>
+
+              <!-- 3-Image Event Gallery -->
+              <h3 class="section-heading">Event Highlights <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">(Click any image to view full size)</span></h3>
+              <div class="article-gallery">
+                <img src="ai-school-1.jpg" alt="Speaking to Grade 7 Learners at Windhoek Central Primary School" class="gallery-img" (click)="openLightbox('ai-school-1.jpg')" onerror="this.style.display='none'">
+                <img src="ai-school-2.jpg" alt="Interactive AI Session with Windhoek Central Primary School Students" class="gallery-img" (click)="openLightbox('ai-school-2.jpg')" onerror="this.style.display='none'">
+                <img src="ai-school-3.jpg" alt="Grade 7 Learners participating during the AI Awareness session" class="gallery-img full-width-img" (click)="openLightbox('ai-school-3.jpg')" onerror="this.style.display='none'">
+              </div>
+
+              <blockquote class="post-quote">
+                "Your brain is one of your most valuable tools. Do not stop using it simply because technology can do something for you. Let AI be your assistant, not your replacement."
+              </blockquote>
+
+              <p><em>Sometimes, the most important contribution we can make to the future of technology is not building another tool. It is helping the next generation learn how to use those tools wisely.</em></p>
+
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
+      <!-- VIEW 6: INDABAX 2025 READING PAGE -->
+      <ng-container *ngIf="selectedPost === 5">
+        <div class="article-wrapper">
+          <article class="blog-post">
+            
+            <h2 class="post-title">IndabaX 2025: Igniting Curiosity, Expanding Perspectives, and Exploring the Future of Technology</h2>
+            
+            <div class="post-meta">
+              <span class="post-date">30 July & 1 August 2025 | Namibia University of Science and Technology (NUST)</span>
+              <span class="post-category">Artificial Intelligence · Innovation · Professional Growth</span>
+            </div>
+            
+            <div class="post-content">
+              <p><em>Sometimes, all it takes is one conversation, one new idea, or one shared experience to change the way we see the world. For me, IndabaX 2025 was an opportunity to discover new perspectives, connect with like-minded individuals, and deepen my appreciation for the possibilities of technology.</em></p>
+
+              <h3 class="section-heading">Two Days of Learning, Discovery, and Inspiration</h3>
+              <p>On 30 July and 1 August 2025, I had the privilege of attending IndabaX 2025 at the Namibia University of Science and Technology (NUST), participating both virtually and in person.</p>
+              <p>The experience brought together an atmosphere of curiosity, open-mindedness, and enthusiasm for technology. It was an opportunity to engage with new ideas, learn from knowledgeable speakers, and connect with individuals who share an interest in understanding and shaping the technological world around us.</p>
+              <p>As a Computer Science student specializing in Software Development, I am constantly exploring how technology works, how software can solve problems, and how emerging innovations are changing the way we live. However, experiences such as IndabaX offer something that goes beyond textbooks, lectures, and programming exercises: they expose us to new ways of thinking.</p>
+              <p>What made the event particularly memorable was the opportunity to explore complex technological topics in an environment that encouraged curiosity and participation. Rather than making advanced concepts feel inaccessible, the speakers broke them down into engaging discussions that made learning both understandable and enjoyable.</p>
+              <p>I left the experience feeling inspired, intellectually stimulated, and even more motivated to continue developing my knowledge of technology and its potential to improve society.</p>
+
+              <h3 class="section-heading">Making Complex Technology Understandable</h3>
+              <p>One of the aspects I appreciated most about IndabaX 2025 was the way the speakers approached complex topics, particularly Artificial Intelligence.</p>
+              <p>Technology can sometimes feel intimidating, especially when discussions involve advanced concepts, unfamiliar terminology, or mathematical principles that take time to understand. Yet one of the most valuable skills a technology professional can develop is the ability to explain complex ideas in simple, meaningful ways.</p>
+              <p>Throughout the event, I appreciated how the speakers made difficult subjects more accessible through engaging explanations and interactive discussions. Their approach reinforced an important lesson: understanding a technology is one thing, but communicating its significance in a way that others can understand is an entirely different skill.</p>
+              <p>This resonated with me because Computer Science is not simply about writing code or understanding algorithms. It is also about communicating ideas, collaborating with others, and helping people understand how technology can address real-world challenges.</p>
+              <p>The experience reminded me that knowledge becomes even more powerful when it can be shared effectively.</p>
+
+              <h3 class="section-heading">Artificial Intelligence and the Possibilities Ahead</h3>
+              <p>Artificial Intelligence was one of the areas that particularly captured my interest.</p>
+              <p>AI is changing how we approach problems, process information, automate tasks, and interact with digital systems. Its influence extends across education, healthcare, business, scientific research, and countless other fields.</p>
+              <p>As someone specializing in Software Development, I find this evolution especially exciting. It encourages us to reconsider what software can accomplish, how intelligent systems can support human decision-making, and what new opportunities might emerge as the technology develops.</p>
+              <p>However, I also believe that understanding AI requires more than simply being impressed by what it can do. We must learn to question its limitations, consider its implications, and understand the responsibilities involved in developing and using it.</p>
+              <p>IndabaX encouraged me to remain curious about these developments and to appreciate the importance of continuously learning in a field that evolves so rapidly.</p>
+              <p>It reinforced my belief that the future of technology will not be shaped only by the tools we develop, but also by the questions we ask, the problems we choose to solve, and the values we bring to the process.</p>
+
+              <h3 class="section-heading">The Power of Community and Shared Knowledge</h3>
+              <p>Beyond the technical discussions, one of the most rewarding aspects of the event was the opportunity to connect with other individuals who share an interest in technology.</p>
+              <p>There is something uniquely motivating about being in an environment where people are willing to exchange ideas, explore unfamiliar concepts, and learn from one another.</p>
+              <p>Every person brings a different perspective shaped by their experiences, interests, and areas of expertise. Sometimes, a conversation introduces you to an entirely new subject. At other times, it helps you see something you already know from a different angle.</p>
+              <p>Attending IndabaX both physically and virtually allowed me to engage with the event in different ways while appreciating the value of accessible learning opportunities.</p>
+              <p>It reminded me that professional growth does not happen in isolation. While independent study and personal practice are essential, being part of a community can expose us to ideas, opportunities, and perspectives that we might never encounter on our own.</p>
+
+              <h3 class="section-heading">One Candle Lighting Another: The Importance of Sharing Knowledge</h3>
+              <blockquote class="post-quote">
+                "A single candle can illuminate another without losing its own light. In much the same way, knowledge can be shared from one person to another, inspiring new ideas and creating opportunities for collective growth."
+              </blockquote>
+              <p>This is a principle I believe is particularly important in the world of technology.</p>
+              <p>The field advances through people building upon the discoveries, research, experiences, and ideas of others. Every innovation is part of a much larger story of experimentation, collaboration, and shared learning.</p>
+              <p>A developer learns from an open-source project. A student gains a new perspective from a lecturer. A researcher shares findings that inspire another team to investigate a different possibility. A conversation at a technology event encourages someone to explore an idea they had never previously considered.</p>
+              <p>In each of these situations, knowledge becomes a catalyst for further discovery.</p>
+              <p>IndabaX reminded me that we do not always need to have all the answers ourselves. Sometimes, the most valuable thing we can do is remain curious, listen carefully, and learn from people who know something we do not.</p>
+
+              <h3 class="section-heading">Growing Beyond the Classroom</h3>
+              <p>As a Computer Science student, much of my academic journey involves developing technical knowledge, understanding computational concepts, and learning how to build software systems.</p>
+              <p>These foundations are essential. However, attending events such as IndabaX reminds me that becoming a well-rounded technology professional requires continuous learning beyond formal academic work.</p>
+              <p>It involves following emerging developments, exploring unfamiliar disciplines, understanding the needs of different communities, and learning how technology fits into the wider world.</p>
+              <p>It also involves developing qualities that cannot be measured by technical knowledge alone: curiosity, adaptability, communication, creativity, collaboration, and a willingness to challenge one's assumptions.</p>
+
+              <h3 class="section-heading">Looking Towards Namibia's Technological Future</h3>
+              <p>For me, the value of attending a technology event like IndabaX extends beyond personal development.</p>
+              <p>Namibia has opportunities to harness technology to address challenges in education, healthcare, business, public services, and economic development.</p>
+              <p>Realizing these opportunities requires people who are willing to learn, experiment, collaborate, and develop solutions that reflect the needs of their communities.</p>
+              <p>As an aspiring software developer, I want to continue exploring how my skills can contribute to this broader picture. I am interested not only in understanding how technologies work, but also in considering how they can be applied meaningfully within Namibia and beyond.</p>
+
+              <h3 class="section-heading">A Renewed Motivation to Keep Exploring</h3>
+              <p>Looking back on my experience at IndabaX 2025, I am grateful for the opportunity to have participated in both the physical and virtual sessions.</p>
+              <p>The event provided a valuable reminder of how much there is to learn, how quickly technology continues to evolve, and how inspiring it can be to engage with people who are passionate about understanding the world around them.</p>
+              <p>Most importantly, the experience strengthened my motivation to keep growing as a Computer Science student and future technology professional.</p>
+
+              <!-- 3-Image Event Gallery (Bottom Image Stretched) -->
+              <h3 class="section-heading">Event Highlights <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">(Click any image to view full size)</span></h3>
+              <div class="article-gallery">
+                <img src="indaba-1.jpg" alt="IndabaX 2025 Session 1" class="gallery-img" (click)="openLightbox('indaba-1.jpg')" onerror="this.style.display='none'">
+                <img src="indaba-2.jpg" alt="IndabaX 2025 Session 2" class="gallery-img" (click)="openLightbox('indaba-2.jpg')" onerror="this.style.display='none'">
+                <img src="indaba-3.jpg" alt="IndabaX 2025 Session 3" class="gallery-img full-width-img" (click)="openLightbox('indaba-3.jpg')" onerror="this.style.display='none'">
+              </div>
+
+              <!-- External References & Further Reading -->
+              <div class="post-resources">
+                <h4 class="resources-title">Related Posts & Reflections</h4>
+                <div class="resource-links">
+                  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7361481249816821760/" target="_blank" rel="noopener noreferrer" class="resource-btn linkedin-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    My IndabaX 2025 Reflection Post
+                  </a>
+                  <a href="https://www.linkedin.com/posts/ndinelago-nashandi-5937371b9_indabaxnamibia-deeplearningindaba-humancentredai-ugcPost-7359307692408041472-LSzN/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrqfKcBI6GkHiACDN8_DcQc3JCPKFAuJEc" target="_blank" rel="noopener noreferrer" class="resource-btn linkedin-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    Mrs Ndinelago Nashandi - IndabaX Post
+                  </a>
+                </div>
+              </div>
+
+              <blockquote class="post-quote">
+                "Stay Curious, Keep Learning, and Pass the Light Forward. The future of technology will be shaped by what we build, but also by what we learn from one another along the way."
+              </blockquote>
+
+            </div>
+          </article>
+
+          <button class="btn secondary-btn back-btn" (click)="backToList()">← Back to Articles</button>
+        </div>
+      </ng-container>
+
     </div>
 
-    <!-- Dummy Article 2 -->
-    <div class="blog-card">
-      <span class="blog-date">September 2026</span>
-      <h3>Understanding REST APIs</h3>
-      <p>Breaking down how modern applications communicate. A beginner-friendly guide to endpoints, HTTP methods, and structuring JSON data.</p>
-      <a href="#" class="read-more">Read Article →</a>
-    </div>
+    <!-- RIGHT COLUMN: SIDEBAR -->
+    <aside class="blog-sidebar">
+      
+      <!-- Social Networks Widget -->
+      <div class="sidebar-widget social-widget-box">
+        <h4 class="widget-title">My Social Networks</h4>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/geoffrey-sankandi" target="_blank" class="social-badge linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/GeoffreyTheDev" target="_blank" class="social-badge github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Post Navigation Widget -->
+      <div class="sidebar-widget">
+        <h4 class="widget-title">Post Navigation</h4>
+        <ul class="post-nav-list">
+          <li (click)="openArticle(1)" [class.active]="selectedPost === 1">
+            A Year of Growth at Datalani Technology
+          </li>
+          <li (click)="openArticle(2)" [class.active]="selectedPost === 2">
+            Beyond Technology: Biodiversity Workshop
+          </li>
+          <li (click)="openArticle(7)" [class.active]="selectedPost === 7">
+            Beyond Code: VSAT Journey Through Kunene
+          </li>
+          <li (click)="openArticle(3)" [class.active]="selectedPost === 3">
+            Beyond Code: Design Automation Workshop
+          </li>
+          <li (click)="openArticle(6)" [class.active]="selectedPost === 6">
+            IndabaX 2026: Tech, Sustainability & Innovation
+          </li>
+          <li (click)="openArticle(4)" [class.active]="selectedPost === 4">
+            Shaping Next Gen: AI Ethics at Windhoek Central
+          </li>
+          <li (click)="openArticle(5)" [class.active]="selectedPost === 5">
+            IndabaX 2025: Exploring the Future of Tech
+          </li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<!-- FULLSCREEN LIGHTBOX MODAL -->
+<div class="lightbox-overlay" *ngIf="activeImage" (click)="closeLightbox()">
+  <div class="lightbox-container" (click)="$event.stopPropagation()">
+    <button class="lightbox-close-btn" (click)="closeLightbox()">← Back to Post</button>
+    <img [src]="activeImage" alt="Expanded image view" class="lightbox-full-img">
   </div>
 </div>

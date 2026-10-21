@@ -1,23 +1,622 @@
-.room-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-.room-title { font-size: 3rem; color: #38bdf8; border-bottom: 2px solid #1e293b; padding-bottom: 10px; margin-bottom: 10px; }
-
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
-
-.blog-card { 
-  background-color: #1e293b; 
-  padding: 30px; 
-  border-radius: 12px; 
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-  border-top: 4px solid #38bdf8; 
-  transition: transform 0.3s ease; 
+/* ==========================================================================
+   1. MASTER WRAPPER & HEADER
+   ========================================================================== */
+.blog-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 5%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.blog-card:hover { transform: translateY(-5px); }
+.blog-header {
+  margin-bottom: 40px;
+}
 
-.blog-date { color: #94a3b8; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.room-title {
+  font-size: 2.5rem;
+  color: #f8fafc;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
 
-.blog-card h3 { color: #f8fafc; font-size: 1.5rem; margin: 15px 0; }
-.blog-card p { color: #cbd5e1; margin-bottom: 25px; line-height: 1.6; }
+.section-subtitle {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  margin-top: 0;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
 
-.read-more { color: #38bdf8; font-weight: 600; text-decoration: none; transition: color 0.3s ease; }
-.read-more:hover { color: #7dd3fc; }
+.header-banner-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   2. TWO-COLUMN GRID LAYOUT
+   ========================================================================== */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-content {
+  width: 100%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   3. ARTICLE HUB & CARDS
+   ========================================================================== */
+.blog-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+.blog-card {
+  background-color: #1e293b;
+  border-radius: 12px;
+  padding: 28px;
+  border-left: 4px solid #38bdf8;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  background-color: #233045;
+}
+
+.card-title {
+  margin-top: 0;
+  font-size: 1.35rem;
+  color: #f8fafc;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.card-meta {
+  font-size: 0.85rem;
+  color: #38bdf8;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card-preview {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+/* ==========================================================================
+   4. SINGLE ARTICLE READING PAGE
+   ========================================================================== */
+.article-wrapper {
+  width: 100%;
+}
+
+.post-title {
+  font-size: 2.1rem;
+  color: #f8fafc;
+  margin-top: 0;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 30px;
+  font-size: 0.92rem;
+  color: #94a3b8;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 18px;
+}
+
+.post-category {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.post-content p {
+  color: #cbd5e1;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.post-quote {
+  border-left: 4px solid #38bdf8;
+  background-color: #0f172a;
+  padding: 22px 28px;
+  margin: 35px 0;
+  border-radius: 0 8px 8px 0;
+  color: #f8fafc;
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.back-btn {
+  margin-top: 35px;
+  margin-bottom: 20px;
+  padding: 10px 22px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   5. BORDERLESS PHOTO GALLERY
+   ========================================================================== */
+.blog-image {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;         /* Fills area cleanly without borders/letterboxing */
+  border-radius: 10px;
+  border: none;              /* Removed borders */
+  padding: 0;                /* Removed inner padding */
+  background: transparent;   /* Removed dark panel background */
+  margin-bottom: 25px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.blog-image:hover {
+  opacity: 0.9;
+}
+
+.section-heading {
+  color: #f8fafc;
+  margin-top: 40px;
+  margin-bottom: 18px;
+  font-size: 1.25rem;
+}
+
+.article-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;         /* Fills card without border letterboxing */
+  border-radius: 10px;
+  border: none;              /* Removed borders */
+  padding: 0;                /* Removed padding */
+  background: transparent;   /* Removed container background */
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.02);
+  opacity: 0.92;
+}
+
+@media (max-width: 600px) {
+  .article-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-img {
+    height: 320px;
+  }
+}
+
+/* ==========================================================================
+   6. LIGHTBOX MODAL (FULL SCREEN IMAGE VIEW)
+   ========================================================================== */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.92); /* Darkened glass overlay */
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.lightbox-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.lightbox-close-btn {
+  margin-bottom: 15px;
+  padding: 8px 18px;
+  background-color: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+  background-color: #38bdf8;
+  color: #0f172a;
+}
+
+.lightbox-full-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;       /* Full image displays completely in modal */
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   7. OFFICIAL LINKS SECTION
+   ========================================================================== */
+.post-resources {
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid #334155;
+}
+
+.resources-title {
+  color: #f8fafc;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resource-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+}
+
+.resource-btn:hover {
+  background-color: #1e293b;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.resource-btn.linkedin-btn {
+  color: #f8fafc;
+  border-color: #0077b5;
+  background-color: rgba(0, 119, 181, 0.2);
+}
+
+.resource-btn.linkedin-btn:hover {
+  background-color: #0077b5;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   8. RIGHT SIDEBAR & WIDGETS
+   ========================================================================== */
+.blog-sidebar {
+  position: sticky;
+  top: 100px; /* Increased top offset so it sits safely below the fixed header bar */
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: calc(100vh - 120px); /* Keeps sidebar scrollable within screen height */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+}
+
+.sidebar-widget {
+  background-color: #1e293b;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.widget-title {
+  color: #f8fafc;
+  margin-top: 0;
+  font-size: 1.05rem;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.social-widget-box {
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.social-badge {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-badge:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.linkedin {
+  background-color: #0077b5;
+  color: #ffffff;
+}
+
+.github {
+  background-color: #24292e;
+  color: #ffffff;
+}
+
+.post-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-nav-list li {
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.post-nav-list li:hover {
+  color: #f8fafc;
+  background-color: #334155;
+  transform: translateX(4px);
+}
+
+.post-nav-list li.active {
+  color: #38bdf8;
+  font-weight: 600;
+  border-left: 3px solid #38bdf8;
+  border-radius: 0 6px 6px 0;
+  background-color: rgba(56, 189, 248, 0.08);
+}
+/* Gallery Container: 2-column grid */
+.article-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 15px;
+}
+
+/* Default styling for top 2 photos */
+.gallery-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery-img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Stretch 3rd / bottom image across both columns */
+.article-gallery .full-width-img,
+.article-gallery img:nth-child(3):last-child {
+  grid-column: 1 / -1; /* Spans full grid width */
+  height: 320px;       /* Slightly taller landscape aspect ratio */
+  object-fit: cover;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .article-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  .article-gallery .full-width-img,
+  .article-gallery img:nth-child(3):last-child {
+    grid-column: span 1;
+    height: 240px;
+  }
+}
+/* ==========================================================================
+   BLOG POST IMAGES & GALLERY (CUSTOM CROPPING & HOVER EFFECTS)
+   ========================================================================== */
+
+/* Standard Inline Blog Images */
+.blog-post .blog-image {
+  width: 100%;
+  height: 380px;              /* Uniform frame height for all inline photos */
+  object-fit: cover;           /* Crops the image to fill the frame without distortion */
+  object-position: center 30%; /* Focuses framing toward the upper third (ideal for portraits/domes) */
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  margin: 24px 0;
+  display: block;
+}
+
+.blog-post .blog-image:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.05);
+}
+
+/* Gallery Grid for Side-by-Side Images */
+.article-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 260px;              /* Standard height for gallery grid cards */
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.gallery-img.full-width-img {
+  grid-column: 1 / -1;
+  height: 360px;
+}
+
+/* Custom Focal Point Tweaks for Specific VSAT Photos */
+.crop-top {
+  object-position: center top !important;
+}
+
+.crop-dome {
+  object-position: center 20% !important; /* Keeps tall satellite domes & heads visible */
+}
+
+.crop-selfie {
+  object-position: 25% 25% !important;   /* Centers on the selfie subject */
+}
+
+
+/* ==========================================================================
+   FULLSCREEN LIGHTBOX MODAL (SHOWS FULL UNCROPPED IMAGE)
+   ========================================================================== */
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 10, 20, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox-container {
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Uncropped image display */
+.lightbox-full-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;        /* Preserves full original aspect ratio without cropping */
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-close-btn {
+  align-self: flex-start;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+/* Custom class to crop images directly from the top edge */
+.crop-satellite-top {
+  object-position: center top !important;
+}
+/* ==========================================================================
+   HEADER ANIMATED BANNER (FULL SIZE & STATIC)
+   ========================================================================== */
+
+.blog-header {
+  margin-bottom: 35px;
+}
+
+.header-banner-img {
+  width: 100%;
+  height: auto; /* Displays the complete image preserving original dimensions without cropping */
+  border-radius: 16px;
+  margin-top: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: block;
+}

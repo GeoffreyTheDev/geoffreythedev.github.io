@@ -1,75 +1,62 @@
-.room-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.room-title {
-  font-size: 3rem;
-  color: #38bdf8;
-  border-bottom: 2px solid #1e293b;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-  margin-top: 40px;
+  gap: 30px;
+  width: 100%;
 }
 
 .project-card {
   background-color: #1e293b;
   border-radius: 12px;
+  padding: 30px;
+  border-top: 4px solid #38bdf8;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-  border: 1px solid transparent;
 }
 
 .project-card:hover {
   transform: translateY(-5px);
-  border-color: #38bdf8;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
 }
 
-.project-content {
-  padding: 25px;
-}
-
-.project-content h3 {
-  color: #f8fafc;
-  font-size: 1.4rem;
+.project-title {
   margin-top: 0;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #f8fafc;
 }
 
-.project-content p {
-  color: #cbd5e1;
-  font-size: 1rem;
+.project-description {
+  color: #94a3b8;
+  line-height: 1.6;
+  flex-grow: 1; /* Pushes links to the bottom if descriptions vary in length */
+  margin-bottom: 25px;
 }
 
-.project-actions {
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tech-tag {
   background-color: #0f172a;
-  padding: 15px 25px;
-  border-top: 1px solid #1e293b;
-}
-
-.like-btn {
-  background-color: transparent;
   color: #38bdf8;
-  border: 1px solid #38bdf8;
-  border-radius: 6px;
-  padding: 8px 15px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 
-.like-btn:hover {
-  background-color: #38bdf8;
-  color: #0f172a;
+.project-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* Ensuring buttons fit nicely in the cards */
+.project-links .btn {
+  padding: 8px 16px;
+  font-size: 0.95rem;
 }

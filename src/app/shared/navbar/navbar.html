@@ -1,13 +1,21 @@
 <nav class="navbar">
   <div class="nav-brand">
-    <!-- Changed from <span> to <a> and updated the name -->
     <a routerLink="/" class="logo-text">Geoffrey Sankandi<span class="highlight-dot">.</span></a>
   </div>
-  <div class="nav-links">
-    <a routerLink="/">Home</a>
-    <a routerLink="/about">About</a>
-    <a routerLink="/projects">Projects</a>
-    <a routerLink="/blog" (click)="resetBlog($event)" class="nav-link">Blog</a>
-    <a routerLink="/contact">Contact</a>
+
+  <!-- Hamburger Menu Button (Animates to an 'X' when isMenuOpen is true) -->
+  <button class="hamburger" [class.is-active]="isMenuOpen" (click)="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <!-- Full-Screen Dropdown Menu -->
+  <div class="nav-links" [class.active]="isMenuOpen">
+    <a routerLink="/" routerLinkActive="active-btn" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
+    <a routerLink="/about" routerLinkActive="active-btn" (click)="closeMenu()">About</a>
+    <a routerLink="/projects" routerLinkActive="active-btn" (click)="closeMenu()">Projects</a>
+    <a routerLink="/blog" routerLinkActive="active-btn" (click)="closeMenu()">Blog</a>
+    <a routerLink="/contact" routerLinkActive="active-btn" (click)="closeMenu()">Contact</a>
   </div>
 </nav>

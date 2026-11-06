@@ -1,18 +1,38 @@
-.room-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-.room-title { font-size: 3rem; color: #38bdf8; border-bottom: 2px solid #1e293b; padding-bottom: 10px; margin-bottom: 10px; }
+.room-container { 
+  max-width: 1100px; 
+  margin: 0 auto; 
+  padding: 40px 20px; 
+  box-sizing: border-box; /* Ensures padding doesn't push the container off-screen */
+}
 
-.contact-layout { display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap; align-items: flex-start; }
+.room-title { 
+  font-size: 3rem; 
+  color: #38bdf8; 
+  border-bottom: 2px solid #1e293b; 
+  padding-bottom: 10px; 
+  margin-bottom: 10px; 
+}
+
+.contact-layout { 
+  display: flex; 
+  gap: 40px; 
+  margin-top: 40px; 
+  flex-wrap: wrap; 
+  align-items: flex-start; 
+}
 
 /* Left Side: Info Box Panel */
 .contact-info { 
   flex: 1; 
-  min-width: 320px; 
+  min-width: 280px; /* Reduced from 320px to prevent mobile overflow */
   background-color: #1e293b; 
   padding: 40px; 
   border-radius: 12px; 
   border-top: 4px solid #38bdf8; 
   box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+  box-sizing: border-box;
 }
+
 .contact-info h3 { color: #f8fafc; font-size: 1.5rem; margin-top: 0; margin-bottom: 15px; }
 .contact-info p { color: #cbd5e1; line-height: 1.6; margin-bottom: 25px; }
 .contact-info ul { list-style: none; padding: 0; margin: 0; margin-bottom: 30px;}
@@ -27,7 +47,7 @@
 /* Right Side: Form Panel */
 .contact-form { 
   flex: 1.5; 
-  min-width: 320px; 
+  min-width: 280px; /* Reduced from 320px to prevent mobile overflow */
   display: flex; 
   flex-direction: column; 
   gap: 25px; 
@@ -35,7 +55,9 @@
   padding: 40px; 
   border-radius: 12px; 
   box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+  box-sizing: border-box;
 }
+
 .form-group { display: flex; flex-direction: column; gap: 8px; width: 100%; }
 .form-group label { color: #f8fafc; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; }
 
@@ -64,6 +86,7 @@
 .btn { padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; align-self: flex-start; }
 .primary-btn { background-color: #38bdf8; color: #0f172a; }
 .primary-btn:hover { background-color: #7dd3fc; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3); }
+
 /* Success Button (Green) */
 .success-btn { 
   background-color: #22c55e; 
@@ -75,4 +98,27 @@
   color: #22c55e; 
   transform: translateY(-2px); 
   box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2); 
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE DESIGN (FIXES EDGE CRAMPING)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .room-container {
+    padding: 30px 15px; /* Ensures outer margins always exist on phones */
+  }
+  
+  .contact-layout {
+    gap: 25px; 
+    margin-top: 25px;
+  }
+  
+  .contact-info, .contact-form {
+    padding: 25px; /* Reduces the massive 40px desktop padding so text isn't squeezed */
+    min-width: 100%; /* Stacks the boxes neatly to fill the safe area */
+  }
+
+  .room-title {
+    font-size: 2.2rem; /* Scales the title down slightly to fit mobile screens gracefully */
+  }
 }

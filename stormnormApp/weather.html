@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StormNorm Weather</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.7)',
+                        glassBorder: 'rgba(255, 255, 255, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Beautiful light airy gradient background */
+            background: linear-gradient(135deg, #e0f2fe 0%, #f1f5f9 50%, #e2e8f0 100%);
+            background-attachment: fixed;
+            color: #1e293b;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px rgba(148, 163, 184, 0.15);
+        }
+
+        /* Custom Scrollbar for chat */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.6);
+        }
+
+        /* Loading spinner animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-custom {
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Floating animation for main icon */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .chat-message-ai {
+            background: white;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .chat-message-user {
+            background: linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%);
+        }
+
+        /* Weather Animations */
+        @keyframes cloudDrift {
+            0% { transform: translateX(-10%); }
+            100% { transform: translateX(110vw); }
+        }
+        .animate-cloud {
+            animation: cloudDrift linear infinite;
+        }
+        @keyframes rainFall {
+            0% { transform: translateY(-10vh) rotate(15deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(110vh) rotate(15deg); opacity: 0; }
+        }
+        .raindrop {
+            position: absolute;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(147, 197, 253, 0.8));
+            width: 2px;
+            height: 30px;
+            border-radius: 50%;
+            animation: rainFall linear infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 font-sans overflow-x-hidden relative">
+
+    <!-- Weather Animation Background layer -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="weather-fx">
+        <!-- Clouds -->
+        <i class="fa-solid fa-cloud text-white/50 text-9xl absolute top-10 -left-32 animate-cloud" style="animation-duration: 40s;"></i>
+        <i class="fa-solid fa-cloud text-slate-100/40 text-[12rem] absolute top-40 -left-64 animate-cloud" style="animation-duration: 65s; animation-delay: -10s;"></i>
+        <i class="fa-solid fa-cloud text-white/60 text-8xl absolute top-80 -left-20 animate-cloud" style="animation-duration: 50s; animation-delay: -25s;"></i>
+        <!-- Rain container -->
+        <div id="rain-layer" class="absolute inset-0"></div>
+    </div>
+
+    <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative z-10 flex-grow content-center">
+        
+        <!-- Header / Logo section -->
+        <div class="col-span-1 lg:col-span-12 flex justify-between items-center mb-2">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-blue-500"></i>StormNorm
+                </h1>
+            </div>
+        </div>
+
+        <!-- LEFT PANEL: WEATHER DASHBOARD -->
+        <div class="glass-panel rounded-3xl p-6 lg:p-8 col-span-1 lg:col-span-7 flex flex-col gap-6 relative overflow-hidden transition-all">
+            
+            <!-- Search Bar -->
+            <div class="relative w-full flex gap-2">
+                <div class="relative flex-grow">
+                    <i class="fa-solid fa-location-dot absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="city-search" placeholder="Search any city (e.g., Windhoek, Tokyo)..." 
+                        class="w-full bg-white/70 border border-slate-200 rounded-full py-3 pl-12 pr-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all shadow-sm">
+                </div>
+                <button onclick="searchCity()" class="bg-blue-600 hover:bg-blue-500 text-white rounded-full px-6 py-3 font-medium transition-colors shadow-md shadow-blue-500/20">
+                    Search
+                </button>
+            </div>
+
+            <!-- Error / Loading Message container -->
+            <div id="weather-status" class="hidden text-center py-2 text-sm font-medium"></div>
+
+            <!-- Main Weather Display -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 py-4">
+                <div class="flex flex-col text-center md:text-left">
+                    <h2 id="location-name" class="text-4xl md:text-5xl font-bold tracking-tight mb-2 text-slate-800">Windhoek</h2>
+                    <p id="location-country" class="text-lg text-slate-500 font-medium">Namibia</p>
+                    <p id="current-date" class="text-sm text-slate-400 mt-4"></p>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div id="weather-icon-main" class="text-7xl md:text-8xl text-yellow-400 drop-shadow-lg animate-float mb-4">
+                        <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <p id="weather-desc" class="text-xl font-semibold text-slate-700 capitalize">Clear Sky</p>
+                </div>
+
+                <div class="flex flex-col items-center md:items-end text-center md:text-right">
+                    <div class="flex items-start text-slate-800">
+                        <span id="current-temp" class="text-6xl md:text-7xl font-bold tracking-tighter">--</span>
+                        <span class="text-3xl font-light mt-2">°C</span>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <div class="text-center bg-white/50 rounded-xl p-2 px-3 shadow-sm border border-slate-100">
+                            <p class="text-slate-400 text-[10px] mb-1 uppercase tracking-wider font-bold">Wind</p>
+                            <p class="font-semibold text-slate-700"><i class="fa-solid fa-wind text-blue-400 mr-1"></i> <span id="wind-speed">--</span> <span class="text-xs font-normal">km/h</span></p>
+                        </div>
+                        <div class="text-center bg-white/50 rounded-xl p-2 px-3 shadow-sm border border-slate-100">
+                            <p class="text-slate-400 text-[10px] mb-1 uppercase tracking-wider font-bold">Humidity</p>
+                            <p class="font-semibold text-slate-700"><i class="fa-solid fa-droplet text-blue-400 mr-1"></i> <span id="humidity">--</span>%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Forecast -->
+            <div class="mt-auto pt-6 border-t border-slate-200/60">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">7-Day Forecast</h3>
+                <div id="forecast-container" class="grid grid-cols-4 md:grid-cols-7 gap-3 overflow-x-auto pb-2">
+                    <!-- Forecast items will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: AI CHAT ASSISTANT -->
+        <div class="glass-panel rounded-3xl col-span-1 lg:col-span-5 flex flex-col overflow-hidden h-[600px] lg:h-auto shadow-xl">
+            <!-- Chat Header -->
+            <div class="p-4 border-b border-slate-200/60 bg-white/40 flex items-center gap-3 backdrop-blur-md">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-robot text-white"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg text-slate-800">Aura AI</h3>
+                    <p class="text-xs text-emerald-500 flex items-center gap-1 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Online
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chat History Area -->
+            <div id="chat-history" class="flex-grow p-4 overflow-y-auto flex flex-col gap-4">
+                <!-- Welcome Message -->
+                <div class="flex gap-3 max-w-[85%]">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex-shrink-0 flex items-center justify-center mt-1 shadow-sm">
+                        <i class="fa-solid fa-robot text-xs text-white"></i>
+                    </div>
+                    <div class="chat-message-ai rounded-2xl rounded-tl-none px-4 py-3 text-sm leading-relaxed text-slate-700 shadow-sm">
+                        Hello! I'm Aura, your AI weather assistant. I can give you detailed forecasts, climate info, or travel advice for anywhere in the world. How can I help you today?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="p-4 bg-white/40 border-t border-slate-200/60 backdrop-blur-md">
+                <form id="chat-form" class="flex gap-2 relative">
+                    <input type="text" id="chat-input" placeholder="Ask about the weather..." autocomplete="off"
+                        class="w-full bg-white/80 border border-slate-300/60 rounded-full py-3 pl-4 pr-12 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-400 transition-colors shadow-inner">
+                    <button type="submit" id="chat-submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-500 text-white transition-colors shadow-md">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-slate-500 text-sm mt-6 mb-2 text-center font-medium">
+        Portfolio Showcase • geoffreythedev.github.io
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // --- 0. VISUAL FX LOGIC ---
+        const createRain = () => {
+            const rainLayer = document.getElementById('rain-layer');
+            rainLayer.innerHTML = ''; // reset
+            const dropCount = 30; // Adjust for density
+            for (let i = 0; i < dropCount; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('raindrop');
+                drop.style.left = `${Math.random() * 100}vw`;
+                drop.style.animationDuration = `${0.5 + Math.random() * 1}s`;
+                drop.style.animationDelay = `${Math.random() * 2}s`;
+                rainLayer.appendChild(drop);
+            }
+        };
+        // Generate rain on load to complement the clouds
+        createRain();
+
+
+        // --- 1. WEATHER LOGIC (Open-Meteo API - Free, No Key Required) ---
+
+        // State
+        let currentCity = { name: "Windhoek", country: "Namibia", lat: -22.5594, lon: 17.0832 };
+
+        // Helper: Format Date
+        const formatDate = (dateStr) => {
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            return new Date(dateStr).toLocaleDateString('en-US', options);
+        };
+
+        const updateDateHeader = () => {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').innerText = now.toLocaleDateString('en-US', options);
+        };
+
+        // WMO Weather interpretation codes mapping
+        const getWeatherMetadata = (code) => {
+            const weatherMap = {
+                0: { desc: 'Clear sky', icon: 'fa-sun', color: 'text-yellow-400' },
+                1: { desc: 'Mainly clear', icon: 'fa-sun', color: 'text-yellow-400' },
+                2: { desc: 'Partly cloudy', icon: 'fa-cloud-sun', color: 'text-slate-400' },
+                3: { desc: 'Overcast', icon: 'fa-cloud', color: 'text-slate-500' },
+                45: { desc: 'Fog', icon: 'fa-smog', color: 'text-slate-400' },
+                48: { desc: 'Depositing rime fog', icon: 'fa-smog', color: 'text-slate-400' },
+                51: { desc: 'Light drizzle', icon: 'fa-cloud-rain', color: 'text-blue-400' },
+                53: { desc: 'Moderate drizzle', icon: 'fa-cloud-rain', color: 'text-blue-500' },
+                55: { desc: 'Dense drizzle', icon: 'fa-cloud-showers-heavy', color: 'text-blue-600' },
+                61: { desc: 'Slight rain', icon: 'fa-cloud-rain', color: 'text-blue-500' },
+                63: { desc: 'Moderate rain', icon: 'fa-cloud-showers-heavy', color: 'text-blue-600' },
+                65: { desc: 'Heavy rain', icon: 'fa-cloud-showers-water', color: 'text-blue-700' },
+                71: { desc: 'Slight snow', icon: 'fa-snowflake', color: 'text-slate-300' },
+                73: { desc: 'Moderate snow', icon: 'fa-snowflake', color: 'text-slate-400' },
+                75: { desc: 'Heavy snow', icon: 'fa-snowflake', color: 'text-slate-500' },
+                95: { desc: 'Thunderstorm', icon: 'fa-bolt', color: 'text-yellow-500' },
+                96: { desc: 'Thunderstorm with hail', icon: 'fa-cloud-bolt', color: 'text-purple-500' },
+                99: { desc: 'Heavy thunderstorm', icon: 'fa-cloud-bolt', color: 'text-purple-600' }
+            };
+            return weatherMap[code] || { desc: 'Unknown', icon: 'fa-cloud', color: 'text-slate-400' };
+        };
+
+        const setStatus = (msg, isError = false) => {
+            const statusEl = document.getElementById('weather-status');
+            if (!msg) {
+                statusEl.classList.add('hidden');
+            } else {
+                statusEl.classList.remove('hidden');
+                statusEl.innerText = msg;
+                statusEl.className = `text-center py-2 text-sm font-medium ${isError ? 'text-red-500' : 'text-blue-500'} transition-opacity`;
+            }
+        };
+
+        const fetchWeather = async (lat, lon, cityName, countryName) => {
+            try {
+                setStatus('Fetching latest weather data...');
+                // Fetch current weather and daily forecast (7 days)
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,is_day,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("Failed to fetch weather data");
+                const data = await res.json();
+
+                updateWeatherUI(cityName, countryName, data);
+                setStatus(''); // Clear status
+                
+                // Keep context for AI
+                currentCity = { name: cityName, country: countryName, lat, lon };
+
+            } catch (error) {
+                console.error(error);
+                setStatus('Could not load weather data.', true);
+            }
+        };
+
+        const updateWeatherUI = (city, country, data) => {
+            // Update Text Data
+            document.getElementById('location-name').innerText = city;
+            document.getElementById('location-country').innerText = country || '';
+            document.getElementById('current-temp').innerText = Math.round(data.current.temperature_2m);
+            document.getElementById('humidity').innerText = data.current.relative_humidity_2m;
+            document.getElementById('wind-speed').innerText = Math.round(data.current.wind_speed_10m);
+
+            // Update Main Icon & Desc
+            const meta = getWeatherMetadata(data.current.weather_code);
+            // Adjust icon based on day/night if it's clear
+            let iconClass = meta.icon;
+            if (data.current.weather_code === 0 && data.current.is_day === 0) iconClass = 'fa-moon';
+            
+            document.getElementById('weather-icon-main').innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+            document.getElementById('weather-icon-main').className = `text-7xl md:text-8xl drop-shadow-2xl animate-float mb-4 ${meta.color}`;
+            document.getElementById('weather-desc').innerText = meta.desc;
+
+            // Update Forecast
+            const forecastContainer = document.getElementById('forecast-container');
+            forecastContainer.innerHTML = ''; // clear existing
+            
+            // Loop through 7 days
+            for (let i = 0; i < 7; i++) {
+                if (i >= data.daily.time.length) break;
+                
+                const dateObj = new Date(data.daily.time[i]);
+                const isToday = i === 0;
+                const dayName = isToday ? 'Today' : dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+                const maxTemp = Math.round(data.daily.temperature_2m_max[i]);
+                const minTemp = Math.round(data.daily.temperature_2m_min[i]);
+                const dayMeta = getWeatherMetadata(data.daily.weather_code[i]);
+
+                const forecastHtml = `
+                    <div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-white/70 shadow-sm border border-slate-100 hover:bg-white transition-colors cursor-pointer min-w-[70px]">
+                        <p class="text-xs font-bold text-slate-400 mb-2">${dayName}</p>
+                        <i class="fa-solid ${dayMeta.icon} text-2xl mb-2 ${dayMeta.color}"></i>
+                        <p class="text-sm font-bold text-slate-700">${maxTemp}°</p>
+                        <p class="text-xs font-medium text-slate-400">${minTemp}°</p>
+                    </div>
+                `;
+                forecastContainer.insertAdjacentHTML('beforeend', forecastHtml);
+            }
+        };
+
+        const searchCity = async () => {
+            const query = document.getElementById('city-search').value.trim();
+            if (!query) return;
+
+            try {
+                setStatus('Searching location...');
+                // Use Open-Meteo Geocoding API
+                const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=en&format=json`;
+                const res = await fetch(geoUrl);
+                const data = await res.json();
+
+                if (data.results && data.results.length > 0) {
+                    const location = data.results[0];
+                    await fetchWeather(location.latitude, location.longitude, location.name, location.country);
+                    document.getElementById('city-search').value = ''; // clear input
+                } else {
+                    setStatus('City not found. Try again.', true);
+                }
+            } catch (error) {
+                console.error(error);
+                setStatus('Error searching for city.', true);
+            }
+        };
+
+        // Allow 'Enter' key to trigger search
+        document.getElementById('city-search').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                searchCity();
+            }
+        });
+
+
+        // --- 2. GEMINI AI CHAT LOGIC ---
+
+        const apiKey = "AQ.Ab8RN6JLBcw9_05vD-ln4hePHLYgeUYVGdngUybGRz83_G1mDA"; // Left empty as requested for the immersive environment payload injection
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+        let chatHistory = [];
+        
+        const systemPrompt = "You are Aura, an advanced AI weather and climate assistant built for StormNorm (a portfolio project by geoffreythedev.github.io). You help users understand weather patterns, forecasts, and climate for any location globally. Provide concise, helpful, and friendly answers. Use formatting like bullet points or bold text where it makes sense. If asked about current weather or real-world facts, utilize the Google Search grounding capability to provide the most up-to-date accurate information.";
+
+        const appendMessage = (text, isUser = false, animateTyping = false) => {
+            const chatContainer = document.getElementById('chat-history');
+            const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-3 max-w-[85%] ${isUser ? 'self-end flex-row-reverse' : ''}`;
+            
+            const iconHtml = isUser 
+                ? `<div class="w-8 h-8 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center mt-1 shadow-sm"><i class="fa-solid fa-user text-xs text-slate-500"></i></div>`
+                : `<div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex-shrink-0 flex items-center justify-center mt-1 shadow-sm"><i class="fa-solid fa-robot text-xs text-white"></i></div>`;
+            
+            const bubbleInner = document.createElement('div');
+            bubbleInner.className = `${isUser ? 'chat-message-user rounded-tr-none text-white' : 'chat-message-ai rounded-tl-none text-slate-700'} rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm`;
+
+            if (!animateTyping) {
+                bubbleInner.innerHTML = formattedText;
+            }
+
+            msgDiv.innerHTML = iconHtml;
+            msgDiv.appendChild(bubbleInner);
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Typing Animation Logic for AI Responses
+            if (animateTyping) {
+                let i = 0;
+                let typingInterval = setInterval(() => {
+                    if (i < formattedText.length) {
+                        // Check if we hit an HTML tag to output it instantly rather than char-by-char
+                        if (formattedText.charAt(i) === '<') {
+                            let endTag = formattedText.indexOf('>', i);
+                            if (endTag !== -1) {
+                                bubbleInner.innerHTML += formattedText.substring(i, endTag + 1);
+                                i = endTag + 1;
+                            } else {
+                                bubbleInner.innerHTML += formattedText.charAt(i);
+                                i++;
+                            }
+                        } else {
+                            bubbleInner.innerHTML += formattedText.charAt(i);
+                            i++;
+                        }
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                    } else {
+                        clearInterval(typingInterval);
+                    }
+                }, 15); // Adjust typing speed here (lower is faster)
+            }
+        };
+
+        const showTypingIndicator = () => {
+            const chatContainer = document.getElementById('chat-history');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = "flex gap-3 max-w-[85%]";
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex-shrink-0 flex items-center justify-center mt-1 shadow-sm">
+                    <i class="fa-solid fa-robot text-xs text-white"></i>
+                </div>
+                <div class="chat-message-ai rounded-2xl rounded-tl-none px-4 py-3 text-sm flex items-center gap-1 shadow-sm">
+                    <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0s"></span>
+                    <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                    <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+                </div>
+            `;
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        };
+
+        const removeTypingIndicator = () => {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) indicator.remove();
+        };
+
+        document.getElementById('chat-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const inputField = document.getElementById('chat-input');
+            const message = inputField.value.trim();
+            const submitBtn = document.getElementById('chat-submit');
+            
+            if (!message) return;
+
+            // 1. Display user message (no typing animation)
+            appendMessage(message, true, false);
+            inputField.value = '';
+            
+            // Lock input while generating
+            inputField.disabled = true;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin-custom text-xs"></i>';
+
+            // 2. Add to history
+            chatHistory.push({ role: "user", parts: [{ text: `User is currently looking at weather for ${currentCity.name}, ${currentCity.country}. Question: ${message}` }] });
+            
+            showTypingIndicator();
+
+            try {
+                // Construct Payload for Gemini
+                const payload = {
+                    contents: chatHistory,
+                    tools: [{ "google_search": {} }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                // Fetch response
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                
+                removeTypingIndicator();
+
+                if (result.candidates && result.candidates.length > 0) {
+                    const aiText = result.candidates[0].content.parts[0].text;
+                    
+                    // Add AI response to UI with typing animation (set to true)
+                    appendMessage(aiText, false, true);
+                    chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+                } else {
+                    appendMessage("I'm sorry, I'm having trouble connecting to my atmospheric sensors right now. Please try again.", false, true);
+                }
+
+            } catch (error) {
+                console.error("Chat API Error:", error);
+                removeTypingIndicator();
+                appendMessage("Connection error. I couldn't reach the AI servers.", false, true);
+            } finally {
+                // Restore input
+                inputField.disabled = false;
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i>';
+                inputField.focus();
+            }
+        });
+
+
+        // --- 3. INITIALIZATION ---
+        window.onload = () => {
+            updateDateHeader();
+            // Default load Windhoek, Namibia
+            fetchWeather(currentCity.lat, currentCity.lon, currentCity.name, currentCity.country);
+        };
+
+    </script>
+</body>
+</html>
